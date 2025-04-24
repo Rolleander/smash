@@ -2,6 +2,7 @@ class_name State extends Node
 
 var fighter : Fighter
 var frame = 0
+var delta = 0
 
 signal finished(next : String)
 

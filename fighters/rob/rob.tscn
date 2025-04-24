@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://7kqs61vfi3ad"]
+[gd_scene load_steps=54 format=3 uid="uid://7kqs61vfi3ad"]
 
 [ext_resource type="Script" uid="uid://cjtbpjucyo6s4" path="res://fighters/rob/rob.gd" id="1_4uef7"]
 [ext_resource type="Texture2D" uid="uid://4f3nv8q0p483" path="res://fighters/rob/rob_spriteset.png" id="1_yc6ev"]
@@ -28,6 +28,7 @@
 [ext_resource type="Script" uid="uid://cytot4872pgis" path="res://fighters/_states/ledge_roll.gd" id="24_qy7ub"]
 [ext_resource type="Script" uid="uid://bxyupbll7v46a" path="res://fighters/_global/ledge_scan.gd" id="25_aqnwf"]
 [ext_resource type="PackedScene" uid="uid://b8rhaa8fv4mdc" path="res://fighters/_hitboxes/hitbox_pool.tscn" id="26_7np10"]
+[ext_resource type="Script" uid="uid://ddij2qopeccv4" path="res://fighters/_states/hitstun.gd" id="27_tf6b7"]
 
 [sub_resource type="Animation" id="Animation_vp2n1"]
 resource_name = "AIR"
@@ -62,7 +63,6 @@ tracks/1/keys = {
 [sub_resource type="Resource" id="Resource_tf6b7"]
 script = ExtResource("3_qy7ub")
 damage = 10
-angle = 90
 knockbackBase = 100
 knockbackScaling = 2.0
 hitlag = 1
@@ -109,7 +109,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [30.0]
+"values": [60.0]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -145,7 +145,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(20, -11)]
+"values": [Vector2(35, -11)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -158,6 +158,18 @@ tracks/6/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("HitboxPool/R1:angle")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [340]
 }
 
 [sub_resource type="Animation" id="Animation_7np10"]
@@ -350,6 +362,18 @@ tracks/6/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("HitboxPool/R1:angle")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_jn7bj"]
@@ -545,12 +569,12 @@ position = Vector2(0, 7)
 shape = SubResource("CapsuleShape2D_4uef7")
 
 [node name="GroundL" type="RayCast2D" parent="."]
-position = Vector2(-10, 30)
+position = Vector2(-10, 31)
 target_position = Vector2(0, 10)
 collision_mask = 6
 
 [node name="GroundR" type="RayCast2D" parent="."]
-position = Vector2(10, 30)
+position = Vector2(10, 31)
 target_position = Vector2(0, 10)
 collision_mask = 6
 
@@ -643,6 +667,10 @@ metadata/_custom_type_script = "uid://bctuy608xbj3b"
 [node name="LEDGE_ROLL" type="Node" parent="StateMachine"]
 script = ExtResource("24_qy7ub")
 metadata/_custom_type_script = "uid://cytot4872pgis"
+
+[node name="HITSTUN" type="Node" parent="StateMachine"]
+script = ExtResource("27_tf6b7")
+metadata/_custom_type_script = "uid://ddij2qopeccv4"
 
 [node name="Label" type="Label" parent="."]
 offset_left = -83.0

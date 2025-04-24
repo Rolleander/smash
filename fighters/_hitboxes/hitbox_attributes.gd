@@ -5,7 +5,6 @@ enum Type {
 }
 
 @export var damage = 10
-@export var angle = 90
 @export var knockbackBase = 100
 @export var knockbackScaling = 2.0
 @export var hitlag = 1

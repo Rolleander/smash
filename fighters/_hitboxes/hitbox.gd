@@ -1,14 +1,16 @@
 class_name Hitbox extends Area2D
 
 var atts: HitboxAttributes
+var angle = 0
 var source: Fighter
 var frame = 0
 var hitList = []
 var sourceState: String
 
-func _init(source: Fighter, atts: HitboxAttributes) -> void:
+func _init(source: Fighter, atts: HitboxAttributes, angle: float) -> void:
 	self.source = source
 	self.atts = atts
+	self.angle = angle
 	self.sourceState = source.state
 	self.body_entered.connect(_hit)
 	
@@ -27,4 +29,4 @@ func _hit(body: Node2D):
 		
 func _fighter_hit(fighter: Fighter):
 	fighter.percentage += atts.damage
-	fighter.knockback.apply(atts)
+	fighter.knockback.apply(angle, atts)
