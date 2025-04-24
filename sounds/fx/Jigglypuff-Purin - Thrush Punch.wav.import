@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bc1yt3b4pc0rf"
+path="res://.godot/imported/Jigglypuff-Purin - Thrush Punch.wav-4f1a125d374c6fbe67399d003bd89ad9.sample"
+
+[deps]
+
+source_file="res://sounds/fx/Jigglypuff-Purin - Thrush Punch.wav"
+dest_files=["res://.godot/imported/Jigglypuff-Purin - Thrush Punch.wav-4f1a125d374c6fbe67399d003bd89ad9.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

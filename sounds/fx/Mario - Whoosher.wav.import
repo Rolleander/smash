@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://vcyy8btp7tl4"
+path="res://.godot/imported/Mario - Whoosher.wav-254f9a312a67402da9c777b57cb407cf.sample"
+
+[deps]
+
+source_file="res://sounds/fx/Mario - Whoosher.wav"
+dest_files=["res://.godot/imported/Mario - Whoosher.wav-254f9a312a67402da9c777b57cb407cf.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://da1cob87b8mwp"
+path="res://.godot/imported/Staryu Firing.wav-fd2d4e022a6b4ea84e4d68e92602bd77.sample"
+
+[deps]
+
+source_file="res://sounds/fx/Staryu Firing.wav"
+dest_files=["res://.godot/imported/Staryu Firing.wav-fd2d4e022a6b4ea84e4d68e92602bd77.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

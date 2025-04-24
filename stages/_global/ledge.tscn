@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0gr7nkmp0ygg"]
+
+[ext_resource type="Script" uid="uid://bcbevx8lp32aq" path="res://stages/_global/ledge.gd" id="1_6scyp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ouyju"]
+size = Vector2(40, 18)
+
+[node name="Ledge" type="Area2D"]
+collision_layer = 8
+script = ExtResource("1_6scyp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ouyju")
+debug_color = Color(0, 0.54849, 0.929424, 0.42)
+
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

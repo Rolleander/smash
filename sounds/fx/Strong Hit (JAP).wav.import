@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dr215ocksdlhu"
+path="res://.godot/imported/Strong Hit (JAP).wav-0cd62432d9ab7bb882e0cc1d7bfb6a9f.sample"
+
+[deps]
+
+source_file="res://sounds/fx/Strong Hit (JAP).wav"
+dest_files=["res://.godot/imported/Strong Hit (JAP).wav-0cd62432d9ab7bb882e0cc1d7bfb6a9f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bcdbd6gligoto"
+path="res://.godot/imported/Unsheath Sword.wav-99217fc49a077ac57f2468e203ccee42.sample"
+
+[deps]
+
+source_file="res://sounds/fx/Unsheath Sword.wav"
+dest_files=["res://.godot/imported/Unsheath Sword.wav-99217fc49a077ac57f2468e203ccee42.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

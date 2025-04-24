@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://hycf0yvi5ml4"
+path="res://.godot/imported/Kirby - Stone Begin.wav-b5f1fb40dcfad6dcc0e7172487313928.sample"
+
+[deps]
+
+source_file="res://sounds/fx/Kirby - Stone Begin.wav"
+dest_files=["res://.godot/imported/Kirby - Stone Begin.wav-b5f1fb40dcfad6dcc0e7172487313928.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://nvbdmcd1x2df"
+path="res://.godot/imported/Kirby - Pixie Star.wav-67291aef8753a53dfbac0e27f49ecc69.sample"
+
+[deps]
+
+source_file="res://sounds/fx/Kirby - Pixie Star.wav"
+dest_files=["res://.godot/imported/Kirby - Pixie Star.wav-67291aef8753a53dfbac0e27f49ecc69.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b8cudl2rqvx0"
+path="res://.godot/imported/C Falcon - Boom.wav-baa913145b1bd7b47e3608ec553c31c0.sample"
+
+[deps]
+
+source_file="res://sounds/fx/C Falcon - Boom.wav"
+dest_files=["res://.godot/imported/C Falcon - Boom.wav-baa913145b1bd7b47e3608ec553c31c0.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c0gyap0fpe7pn"
+path="res://.godot/imported/DK - Ground Barrage.wav-2ea03c21f55fa11254e601c1efcb2554.sample"
+
+[deps]
+
+source_file="res://sounds/fx/DK - Ground Barrage.wav"
+dest_files=["res://.godot/imported/DK - Ground Barrage.wav-2ea03c21f55fa11254e601c1efcb2554.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

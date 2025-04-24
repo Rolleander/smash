@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dfn831rmckan1"
+path="res://.godot/imported/Click Whoosh.wav-3ad6097c80e4a4d46fdcc685e9a951d7.sample"
+
+[deps]
+
+source_file="res://sounds/fx/Click Whoosh.wav"
+dest_files=["res://.godot/imported/Click Whoosh.wav-3ad6097c80e4a4d46fdcc685e9a951d7.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

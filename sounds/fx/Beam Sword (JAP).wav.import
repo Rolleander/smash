@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bi63yjj5x4itl"
+path="res://.godot/imported/Beam Sword (JAP).wav-3dfa59acfc439d61f833b50120e10b85.sample"
+
+[deps]
+
+source_file="res://sounds/fx/Beam Sword (JAP).wav"
+dest_files=["res://.godot/imported/Beam Sword (JAP).wav-3dfa59acfc439d61f833b50120e10b85.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

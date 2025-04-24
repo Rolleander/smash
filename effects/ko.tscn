@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://bk350ldnhop88"]
+
+[ext_resource type="Script" uid="uid://dg8pacsfxaj2o" path="res://effects/v_effect.gd" id="1_xoo8h"]
+[ext_resource type="Texture2D" uid="uid://cnfhvtbmib5li" path="res://effects/assets/common/ptc_cmn_dead.png" id="2_xoo8h"]
+[ext_resource type="AudioStream" uid="uid://dbhuib2540sjh" path="res://sounds/fx/KO'ed.wav" id="3_gmkxw"]
+
+[sub_resource type="Animation" id="Animation_1sk05"]
+resource_name = "djump"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.5, 0.2), Vector2(1.5, 4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.633333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 0, 1), Color(1, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wgtnm"]
+_data = {
+&"djump": SubResource("Animation_1sk05")
+}
+
+[node name="ko" type="Node2D" node_paths=PackedStringArray("player")]
+script = ExtResource("1_xoo8h")
+player = NodePath("AnimationPlayer")
+metadata/_custom_type_script = "uid://dg8pacsfxaj2o"
+
+[node name="sprite" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 0, 1)
+scale = Vector2(0.5, 0.2)
+texture = ExtResource("2_xoo8h")
+centered = false
+offset = Vector2(-32, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_wgtnm")
+}
+autoplay = "djump"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_gmkxw")
+autoplay = true

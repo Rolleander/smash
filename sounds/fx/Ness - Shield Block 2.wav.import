@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://nnjb2001nwrk"
+path="res://.godot/imported/Ness - Shield Block 2.wav-465dd6fbf10d291e2c49c345a9ad4271.sample"
+
+[deps]
+
+source_file="res://sounds/fx/Ness - Shield Block 2.wav"
+dest_files=["res://.godot/imported/Ness - Shield Block 2.wav-465dd6fbf10d291e2c49c345a9ad4271.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

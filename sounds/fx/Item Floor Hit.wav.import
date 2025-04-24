@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cujamqh3wt335"
+path="res://.godot/imported/Item Floor Hit.wav-3c65cddc8335b5d9291df62177b953d0.sample"
+
+[deps]
+
+source_file="res://sounds/fx/Item Floor Hit.wav"
+dest_files=["res://.godot/imported/Item Floor Hit.wav-3c65cddc8335b5d9291df62177b953d0.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

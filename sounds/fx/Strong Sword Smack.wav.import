@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cybu36l3kv3ri"
+path="res://.godot/imported/Strong Sword Smack.wav-68ac9e6853eba4cd9db505611a7de26f.sample"
+
+[deps]
+
+source_file="res://sounds/fx/Strong Sword Smack.wav"
+dest_files=["res://.godot/imported/Strong Sword Smack.wav-68ac9e6853eba4cd9db505611a7de26f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dtqoo2x2enby6"
+path="res://.godot/imported/Yoshi - Egg Throw Pop.wav-588348c31ebe2b5b250cc69c84b219af.sample"
+
+[deps]
+
+source_file="res://sounds/fx/Yoshi - Egg Throw Pop.wav"
+dest_files=["res://.godot/imported/Yoshi - Egg Throw Pop.wav-588348c31ebe2b5b250cc69c84b219af.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

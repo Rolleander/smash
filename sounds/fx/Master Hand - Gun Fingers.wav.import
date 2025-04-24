@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cl7bxsubk66kf"
+path="res://.godot/imported/Master Hand - Gun Fingers.wav-17617f97d034cbd7d30a598b46ba72a6.sample"
+
+[deps]
+
+source_file="res://sounds/fx/Master Hand - Gun Fingers.wav"
+dest_files=["res://.godot/imported/Master Hand - Gun Fingers.wav-17617f97d034cbd7d30a598b46ba72a6.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

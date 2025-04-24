@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://biqdxjfqxaq7u"
+path="res://.godot/imported/Link- Moderate Sword Swish.wav-c89e599576acadbdb5b3fc80dcc198c8.sample"
+
+[deps]
+
+source_file="res://sounds/fx/Link- Moderate Sword Swish.wav"
+dest_files=["res://.godot/imported/Link- Moderate Sword Swish.wav-c89e599576acadbdb5b3fc80dcc198c8.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

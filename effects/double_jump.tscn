@@ -1,0 +1,89 @@
+[gd_scene load_steps=8 format=3 uid="uid://c4v2jn331vwvx"]
+
+[ext_resource type="Texture2D" uid="uid://clw3e5okbp32j" path="res://effects/assets/common/ptc_cmn_doublejump.png" id="1_kbopa"]
+[ext_resource type="Script" uid="uid://dg8pacsfxaj2o" path="res://effects/v_effect.gd" id="1_r2an8"]
+[ext_resource type="AudioStream" uid="uid://bdlcqaaae1stb" path="res://sounds/fx/Jump.wav" id="3_1sk05"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_r2an8"]
+blend_mode = 1
+
+[sub_resource type="Animation" id="Animation_yp3pf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PtcCmnDoublejump:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PtcCmnDoublejump:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_1sk05"]
+resource_name = "djump"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PtcCmnDoublejump:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.15, 0.15), Vector2(0.7, 0.7)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PtcCmnDoublejump:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.67451), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wgtnm"]
+_data = {
+&"RESET": SubResource("Animation_yp3pf"),
+&"djump": SubResource("Animation_1sk05")
+}
+
+[node name="DoubleJump" type="Node2D" node_paths=PackedStringArray("player")]
+script = ExtResource("1_r2an8")
+player = NodePath("AnimationPlayer")
+metadata/_custom_type_script = "uid://dg8pacsfxaj2o"
+
+[node name="PtcCmnDoublejump" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_r2an8")
+position = Vector2(0, 1)
+texture = ExtResource("1_kbopa")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_wgtnm")
+}
+autoplay = "djump"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_1sk05")
+autoplay = true

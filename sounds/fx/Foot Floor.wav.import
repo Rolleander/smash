@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c40kjrdvd5wi"
+path="res://.godot/imported/Foot Floor.wav-73c516b0c1480c9c1d9e60751bd0fb4c.sample"
+
+[deps]
+
+source_file="res://sounds/fx/Foot Floor.wav"
+dest_files=["res://.godot/imported/Foot Floor.wav-73c516b0c1480c9c1d9e60751bd0fb4c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

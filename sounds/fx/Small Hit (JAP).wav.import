@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ca38t46q6cop3"
+path="res://.godot/imported/Small Hit (JAP).wav-1592708112f6a9634ab4463c5b82b109.sample"
+
+[deps]
+
+source_file="res://sounds/fx/Small Hit (JAP).wav"
+dest_files=["res://.godot/imported/Small Hit (JAP).wav-1592708112f6a9634ab4463c5b82b109.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

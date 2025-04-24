@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://42g0w8a0t12j"
+path="res://.godot/imported/Kirby - Swiff Sword.wav-4e6f82e0edd4d2adf49fbb4999328ead.sample"
+
+[deps]
+
+source_file="res://sounds/fx/Kirby - Swiff Sword.wav"
+dest_files=["res://.godot/imported/Kirby - Swiff Sword.wav-4e6f82e0edd4d2adf49fbb4999328ead.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://7q1afe1bhxav"
+path="res://.godot/imported/Mario - Super Jump.wav-cb3a7de67f2e3877490c7810cc55a5bf.sample"
+
+[deps]
+
+source_file="res://sounds/fx/Mario - Super Jump.wav"
+dest_files=["res://.godot/imported/Mario - Super Jump.wav-cb3a7de67f2e3877490c7810cc55a5bf.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

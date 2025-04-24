@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cpace5vxaarx1"
+path="res://.godot/imported/Samus - Charging Beam Full.wav-54e53ba9050607b03e249e5f9dab5a11.sample"
+
+[deps]
+
+source_file="res://sounds/fx/Samus - Charging Beam Full.wav"
+dest_files=["res://.godot/imported/Samus - Charging Beam Full.wav-54e53ba9050607b03e249e5f9dab5a11.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

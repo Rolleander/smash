@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dv41o2tf6ummp"
+path="res://.godot/imported/Strong Whoof.wav-3c345acc39b2a00db9c26c4cd79b6d7f.sample"
+
+[deps]
+
+source_file="res://sounds/fx/Strong Whoof.wav"
+dest_files=["res://.godot/imported/Strong Whoof.wav-3c345acc39b2a00db9c26c4cd79b6d7f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

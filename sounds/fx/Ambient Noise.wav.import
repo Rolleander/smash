@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://xj32o53ejnjr"
+path="res://.godot/imported/Ambient Noise.wav-068cd6d7c620df31da5d34f8632781c8.sample"
+
+[deps]
+
+source_file="res://sounds/fx/Ambient Noise.wav"
+dest_files=["res://.godot/imported/Ambient Noise.wav-068cd6d7c620df31da5d34f8632781c8.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bpgkan4xrgmnn"
+path="res://.godot/imported/Box Crate Break.wav-49909ea640e52c847b0bd0019629c625.sample"
+
+[deps]
+
+source_file="res://sounds/fx/Box Crate Break.wav"
+dest_files=["res://.godot/imported/Box Crate Break.wav-49909ea640e52c847b0bd0019629c625.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

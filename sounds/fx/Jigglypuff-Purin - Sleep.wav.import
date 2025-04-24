@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://xmxhw74nhmb5"
+path="res://.godot/imported/Jigglypuff-Purin - Sleep.wav-6e72cfdaec7d7b904dd1062be00e7664.sample"
+
+[deps]
+
+source_file="res://sounds/fx/Jigglypuff-Purin - Sleep.wav"
+dest_files=["res://.godot/imported/Jigglypuff-Purin - Sleep.wav-6e72cfdaec7d7b904dd1062be00e7664.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
