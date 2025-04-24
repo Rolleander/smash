@@ -20,18 +20,21 @@ var alive = true
 var hideCamera = false
 var dropFromY = 0
 var facingRight = true
+var percentage = 0
+var stocks = 3
+var knockback = FighterKnockback.new()
 
 var grabbingLedge: Ledge = null
 var regrabPause = 0
 
 func _ready() -> void:
-	pass
+	knockback.fighter = self
 
 func _physics_process(delta: float) -> void:
 	# make sure the ground raycasts always point downwards, even if character is rotated
 	_angle_down(rcGroundL)
 	_angle_down(rcGroundR)
-
+	
 func _angle_down(node: Node2D):
 	node.global_transform = Transform2D(deg_to_rad(0), node.global_position)
 
@@ -146,4 +149,4 @@ func applySlopeVerticalSpeed():
 	var slope_direction = Vector2(normal.y, -normal.x)
 	#check for downwards slope normal
 	if (facingRight && slope_direction.y < 0) || (!facingRight && slope_direction.y > 0):
-		velocity.y =  max(15, abs(velocity.x) * abs(slope_direction.y) * 2)
+		velocity.y = max(15, abs(velocity.x) * abs(slope_direction.y) * 2)

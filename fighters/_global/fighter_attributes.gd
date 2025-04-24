@@ -19,3 +19,4 @@ class_name FighterAttributes extends Resource
 @export var landingFrames = 0
 @export var jumpSquatFrames = 3
 @export var airJumps = 1
+@export var weight = 100

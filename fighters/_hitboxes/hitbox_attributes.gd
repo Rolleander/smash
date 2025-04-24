@@ -1,0 +1,14 @@
+class_name HitboxAttributes extends Resource
+
+enum Type {
+	NORMAL
+}
+
+@export var damage = 10
+@export var angle = 90
+@export var knockbackBase = 100
+@export var knockbackScaling = 2.0
+@export var hitlag = 1
+@export var type = Type.NORMAL
+@export var angleFlipper = 0
+@export var detached = false

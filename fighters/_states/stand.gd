@@ -15,6 +15,10 @@ func update(_delta: float) -> void:
 	y_scan.update()
 	if CInput.justPressed(fighter, CInput.CTRL.JUMP):
 		return next("JUMP_SQUAT")
+
+	if CInput.justPressed(fighter, CInput.CTRL.ATTACK):
+		return next("ATTACK")
+
 	if x_scan.noFlick():
 		var stick_x = CInput.axis(fighter, CInput.AXIS.X)
 		if stick_x > WALK_V:

@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://msxr2pitp3tn"]
+
+[ext_resource type="Script" uid="uid://cm57m4lp1ll7v" path="res://fighters/_hitboxes/hitbox_template_rect.gd" id="1_ludeq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dxatq"]
+size = Vector2(30, 10)
+
+[node name="Hitbox" type="Area2D" node_paths=PackedStringArray("shape")]
+visible = false
+collision_layer = 32
+script = ExtResource("1_ludeq")
+width = 15.0
+height = 15.0
+shape = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_dxatq")
+debug_color = Color(0.948738, 0, 0.194852, 0.42)

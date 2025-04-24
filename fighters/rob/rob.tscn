@@ -1,9 +1,10 @@
-[gd_scene load_steps=47 format=3 uid="uid://7kqs61vfi3ad"]
+[gd_scene load_steps=53 format=3 uid="uid://7kqs61vfi3ad"]
 
 [ext_resource type="Script" uid="uid://cjtbpjucyo6s4" path="res://fighters/rob/rob.gd" id="1_4uef7"]
 [ext_resource type="Texture2D" uid="uid://4f3nv8q0p483" path="res://fighters/rob/rob_spriteset.png" id="1_yc6ev"]
 [ext_resource type="Resource" uid="uid://dmylagf7ai8kr" path="res://fighters/rob/rob_attributes.tres" id="2_tigya"]
 [ext_resource type="Script" uid="uid://ke4muv8411gh" path="res://fighters/_global/state/state_machine.gd" id="3_nrq36"]
+[ext_resource type="Script" uid="uid://c1lifl0lw2ftt" path="res://fighters/_hitboxes/hitbox_attributes.gd" id="3_qy7ub"]
 [ext_resource type="Script" uid="uid://dc606m8v2oyya" path="res://fighters/_states/stand.gd" id="4_78bka"]
 [ext_resource type="Script" uid="uid://clo5n5scj7ifr" path="res://fighters/_states/dash.gd" id="5_8gid5"]
 [ext_resource type="Script" uid="uid://d35l2jsa02c85" path="res://fighters/_states/air.gd" id="6_nkdak"]
@@ -19,12 +20,14 @@
 [ext_resource type="Script" uid="uid://bu0s5bje31x18" path="res://fighters/_states/drop.gd" id="15_cwjq5"]
 [ext_resource type="Script" uid="uid://cbpqkwd8b7cc3" path="res://fighters/_states/ko.gd" id="17_kw7ob"]
 [ext_resource type="Script" uid="uid://dt1gfjoc5cs32" path="res://fighters/_states/spawn.gd" id="18_tigya"]
+[ext_resource type="Script" uid="uid://doa7f427qwss4" path="res://fighters/_states/attack.gd" id="20_k7j77"]
 [ext_resource type="Script" uid="uid://cfhyumdijotsf" path="res://fighters/_states/ledge_catch.gd" id="20_tqshm"]
 [ext_resource type="Script" uid="uid://cb1eichvw6460" path="res://fighters/_states/ledge_climb.gd" id="21_aqnwf"]
 [ext_resource type="Script" uid="uid://c8hp7spihsw2i" path="res://fighters/_states/ledge_hold.gd" id="22_7np10"]
 [ext_resource type="Script" uid="uid://bctuy608xbj3b" path="res://fighters/_states/ledge_jump.gd" id="23_k7j77"]
 [ext_resource type="Script" uid="uid://cytot4872pgis" path="res://fighters/_states/ledge_roll.gd" id="24_qy7ub"]
 [ext_resource type="Script" uid="uid://bxyupbll7v46a" path="res://fighters/_global/ledge_scan.gd" id="25_aqnwf"]
+[ext_resource type="PackedScene" uid="uid://b8rhaa8fv4mdc" path="res://fighters/_hitboxes/hitbox_pool.tscn" id="26_7np10"]
 
 [sub_resource type="Animation" id="Animation_vp2n1"]
 resource_name = "AIR"
@@ -42,6 +45,136 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [&"AIR"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Resource" id="Resource_tf6b7"]
+script = ExtResource("3_qy7ub")
+damage = 10
+angle = 90
+knockbackBase = 100
+knockbackScaling = 2.0
+hitlag = 1
+type = 0
+angleFlipper = 0
+detached = false
+metadata/_custom_type_script = "uid://c1lifl0lw2ftt"
+
+[sub_resource type="Animation" id="Animation_k7j77"]
+resource_name = "ATTACK"
+length = 0.333336
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"ATTACK"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitboxPool/R1:width")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [30.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HitboxPool/R1:height")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HitboxPool/R1:atts")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("Resource_tf6b7")]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HitboxPool/R1:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(20, -11)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("HitboxPool/R1:active")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.0166667, 0.116667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_7np10"]
+resource_name = "DASH"
+length = 0.333336
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"DASH"]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -115,6 +248,23 @@ tracks/1/keys = {
 "values": [0]
 }
 
+[sub_resource type="Animation" id="Animation_aqnwf"]
+resource_name = "LEDGE_HOLD"
+loop_mode = 1
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"LEDGE_HOLD"]
+}
+
 [sub_resource type="Animation" id="Animation_w0mty"]
 length = 0.001
 tracks/0/type = "value"
@@ -140,6 +290,66 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitboxPool/R1:width")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [20]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HitboxPool/R1:height")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HitboxPool/R1:atts")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HitboxPool/R1:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("HitboxPool/R1:active")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_jn7bj"]
@@ -171,55 +381,10 @@ tracks/1/keys = {
 "values": [1, 0, 2, 3]
 }
 
-[sub_resource type="Animation" id="Animation_aqnwf"]
-resource_name = "LEDGE_HOLD"
-loop_mode = 1
-step = 0.0166667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"LEDGE_HOLD"]
-}
-
-[sub_resource type="Animation" id="Animation_7np10"]
-resource_name = "DASH"
-length = 0.333336
-step = 0.0166667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"DASH"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lldjf"]
 _data = {
 &"AIR": SubResource("Animation_vp2n1"),
+&"ATTACK": SubResource("Animation_k7j77"),
 &"DASH": SubResource("Animation_7np10"),
 &"IDLE": SubResource("Animation_8gid5"),
 &"JUMP": SubResource("Animation_nkdak"),
@@ -231,6 +396,10 @@ _data = {
 [sub_resource type="AtlasTexture" id="AtlasTexture_ndsdt"]
 atlas = ExtResource("1_yc6ev")
 region = Rect2(0, 300, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qy7ub"]
+atlas = ExtResource("1_yc6ev")
+region = Rect2(600, 300, 300, 300)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k7j77"]
 atlas = ExtResource("1_yc6ev")
@@ -276,6 +445,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"AIR",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qy7ub")
+}],
+"loop": true,
+"name": &"ATTACK",
 "speed": 5.0
 }, {
 "frames": [{
@@ -443,6 +620,10 @@ metadata/_custom_type_script = "uid://cbpqkwd8b7cc3"
 script = ExtResource("18_tigya")
 metadata/_custom_type_script = "uid://dt1gfjoc5cs32"
 
+[node name="ATTACK" type="Node" parent="StateMachine"]
+script = ExtResource("20_k7j77")
+metadata/_custom_type_script = "uid://doa7f427qwss4"
+
 [node name="LEDGE_CATCH" type="Node" parent="StateMachine"]
 script = ExtResource("20_tqshm")
 metadata/_custom_type_script = "uid://cfhyumdijotsf"
@@ -491,3 +672,11 @@ collide_with_areas = true
 collide_with_bodies = false
 script = ExtResource("25_aqnwf")
 metadata/_custom_type_script = "uid://bxyupbll7v46a"
+
+[node name="HitboxPool" parent="." instance=ExtResource("26_7np10")]
+
+[node name="R1" parent="HitboxPool" index="0"]
+width = 20.0
+height = 10.0
+
+[editable path="HitboxPool"]
