@@ -12,6 +12,8 @@ func _ready() -> void:
 func _on_blastzone_body_entered(node: Node2D) -> void:
 	if node is Fighter:
 		var fighter = node as Fighter
+		if !fighter.alive:
+			return
 		var effect = koVF.instantiate()
 		effect.global_position = fighter.global_position
 		effect.rotation = fighter.velocity.angle() + PI
@@ -19,3 +21,5 @@ func _on_blastzone_body_entered(node: Node2D) -> void:
 		effect.rotation -= PI / 2
 		get_tree().get_first_node_in_group("veffects_node").add_child(effect)
 		fighter.stateMachine.force_state("KO")
+		fighter.collision.disabled = true
+		fighter.tumbleCollision.disabled = true

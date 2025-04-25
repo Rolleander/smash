@@ -42,9 +42,9 @@ func _physics_process(delta: float) -> void:
 		state.enter(previous_state_path)
 		fighter.state = state.name
 		_force_set = false
-	fighter.move_and_slide()
 	state.delta = delta
 	state.update(delta)
+	fighter.move_and_slide()
 	state.frame += 1
 
 

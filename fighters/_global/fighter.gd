@@ -3,6 +3,9 @@ class_name Fighter extends CharacterBody2D
 @export var sprite: Node2D
 @export var animations: AnimationPlayer
 
+@export var collision: CollisionShape2D
+@export var tumbleCollision: CollisionShape2D
+@export var tumbleSmoke: CPUParticles2D
 @export var rcGroundL: RayCast2D
 @export var rcGroundR: RayCast2D
 @export var rcLedgeGrabF: LedgeScan
@@ -20,12 +23,14 @@ var alive = true
 var hideCamera = false
 var dropFromY = 0
 var facingRight = true
-var percentage = 0
+var percentage = 200
 var stocks = 3
 var knockback = FighterKnockback.new()
 
 var grabbingLedge: Ledge = null
 var regrabPause = 0
+
+var _wallBounce = preload("res://effects/wall_bounce.tscn")
 
 func _ready() -> void:
 	knockback.fighter = self
@@ -150,3 +155,20 @@ func applySlopeVerticalSpeed():
 	#check for downwards slope normal
 	if (facingRight && slope_direction.y < 0) || (!facingRight && slope_direction.y > 0):
 		velocity.y = max(15, abs(velocity.x) * abs(slope_direction.y) * 2)
+
+func surfaceBounce(delta: float, slowDownFactor = 0.8):
+	var bounce = move_and_collide(velocity * delta, true, 0.08, true)
+	if bounce:
+		var normal = bounce.get_normal()
+		var vel_dir = velocity.normalized()
+		var impact = abs(vel_dir.dot(normal))  
+		# 1 = full head-on, 0 = sliding
+		if impact >= 0.4:
+			velocity = velocity.bounce(normal) * slowDownFactor
+			knockback.hitstun = round(knockback.hitstun * slowDownFactor)
+			var effect = _wallBounce.instantiate()
+			effect.global_position = bounce.get_position()
+			print("impact ", impact)
+			get_tree().get_first_node_in_group("veffects_node").add_child(effect)
+			return true
+	return false

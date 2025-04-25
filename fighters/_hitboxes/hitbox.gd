@@ -29,4 +29,4 @@ func _hit(body: Node2D):
 		
 func _fighter_hit(fighter: Fighter):
 	fighter.percentage += atts.damage
-	fighter.knockback.apply(angle, atts)
+	fighter.knockback.apply(angle, atts, source)

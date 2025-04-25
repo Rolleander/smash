@@ -13,7 +13,8 @@ func update(_delta: float) -> void:
 		fighter.fastFall = true
 		Sounds.play(fastFallSound, fighter.global_position, -2, 2)
 		
-	air_movement(true)
+	air_movement()
+	check_platforms()
 	
 	if CInput.justPressed(fighter, CInput.CTRL.JUMP) and fighter.airJumps < fighter.atts.airJumps:
 		fighter.airJumps += 1
@@ -26,27 +27,30 @@ func update(_delta: float) -> void:
 		if CInput.pressed(fighter, CInput.CTRL.RIGHT):
 			fighter.velocity.x = fighter.atts.maxAirSpeed
 
-func air_movement(allowTurning = false):
+func air_movement(allowTurning = true, steerFactor = 1.0):
 	if fighter.velocity.y < 0:
 		fighter.dropFromY = fighter.global_position.y
 	if fighter.velocity.y < fighter.atts.fallSpeed:
 		fighter.velocity.y += fighter.atts.fallAcceleration
 		fighter.velocity.y = clamp(fighter.velocity.y, fighter.velocity.y, fighter.atts.fallSpeed)
-	if fighter.velocity.y > 0:
-		fighter.enablePlatformCollision(!fighter.fastFall)
-	elif fighter.velocity.y < 0:
-		fighter.enablePlatformCollision(false)
-		
+	if steerFactor == 0 || !_air_steering(allowTurning, steerFactor):
+		fighter.dampenHorizontalMovement(fighter.atts.airAcceleration / 5.0)
+
+func _air_steering(allowTurning = true, factor = 1.0):
 	if CInput.pressed(fighter, CInput.CTRL.LEFT) and fighter.velocity.x > fighter.atts.maxAirSpeed * -1:
 		fighter.velocity.x -= fighter.atts.airAcceleration
 		if allowTurning:
 			fighter.turn(true)
+		return true
 	if CInput.pressed(fighter, CInput.CTRL.RIGHT) and fighter.velocity.x < fighter.atts.maxAirSpeed:
 		fighter.velocity.x += fighter.atts.airAcceleration
 		if allowTurning:
 			fighter.turn(false)
-	if not CInput.pressed(fighter, CInput.CTRL.LEFT) and not CInput.pressed(fighter, CInput.CTRL.RIGHT):
-		if fighter.velocity.x < 0:
-			fighter.velocity.x += fighter.atts.airAcceleration / 5.0
-		elif fighter.velocity.x > 0:
-			fighter.velocity.x -= fighter.atts.airAcceleration / 5.0
+		return true
+	return false
+
+func check_platforms():
+	if fighter.velocity.y > 0:
+		fighter.enablePlatformCollision(!fighter.fastFall)
+	elif fighter.velocity.y < 0:
+		fighter.enablePlatformCollision(false)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://7kqs61vfi3ad"]
+[gd_scene load_steps=64 format=3 uid="uid://7kqs61vfi3ad"]
 
 [ext_resource type="Script" uid="uid://cjtbpjucyo6s4" path="res://fighters/rob/rob.gd" id="1_4uef7"]
 [ext_resource type="Texture2D" uid="uid://4f3nv8q0p483" path="res://fighters/rob/rob_spriteset.png" id="1_yc6ev"]
@@ -29,6 +29,19 @@
 [ext_resource type="Script" uid="uid://bxyupbll7v46a" path="res://fighters/_global/ledge_scan.gd" id="25_aqnwf"]
 [ext_resource type="PackedScene" uid="uid://b8rhaa8fv4mdc" path="res://fighters/_hitboxes/hitbox_pool.tscn" id="26_7np10"]
 [ext_resource type="Script" uid="uid://ddij2qopeccv4" path="res://fighters/_states/hitstun.gd" id="27_tf6b7"]
+[ext_resource type="Script" uid="uid://cxg1jun1bwwpi" path="res://fighters/_states/tumble.gd" id="28_13lek"]
+[ext_resource type="Texture2D" uid="uid://lqt76p8owsid" path="res://effects/assets/common/ptc_cmn_smokeB.png" id="31_s6tx8"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_s6tx8"]
+blend_mode = 1
+
+[sub_resource type="Curve" id="Curve_c6kbh"]
+_data = [Vector2(0, 0.222296), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_5b2vd"]
+offsets = PackedFloat32Array(0, 0.981873)
+colors = PackedColorArray(0.47788, 0.47788, 0.47788, 1, 0.377919, 0.377919, 0.377919, 0)
 
 [sub_resource type="Animation" id="Animation_vp2n1"]
 resource_name = "AIR"
@@ -67,7 +80,7 @@ knockbackBase = 100
 knockbackScaling = 2.0
 hitlag = 1
 type = 0
-angleFlipper = 0
+angleCalc = 1
 detached = false
 metadata/_custom_type_script = "uid://c1lifl0lw2ftt"
 
@@ -405,15 +418,77 @@ tracks/1/keys = {
 "values": [1, 0, 2, 3]
 }
 
+[sub_resource type="Animation" id="Animation_tf6b7"]
+resource_name = "HITSTUN"
+length = 0.166669
+loop_mode = 1
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"HITSTUN"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_13lek"]
+resource_name = "TUMBLE"
+length = 0.166669
+loop_mode = 1
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"TUMBLE"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lldjf"]
 _data = {
 &"AIR": SubResource("Animation_vp2n1"),
 &"ATTACK": SubResource("Animation_k7j77"),
 &"DASH": SubResource("Animation_7np10"),
+&"HITSTUN": SubResource("Animation_tf6b7"),
 &"IDLE": SubResource("Animation_8gid5"),
 &"JUMP": SubResource("Animation_nkdak"),
 &"LEDGE_HOLD": SubResource("Animation_aqnwf"),
 &"RESET": SubResource("Animation_w0mty"),
+&"TUMBLE": SubResource("Animation_13lek"),
 &"WALK": SubResource("Animation_jn7bj")
 }
 
@@ -428,6 +503,10 @@ region = Rect2(600, 300, 300, 300)
 [sub_resource type="AtlasTexture" id="AtlasTexture_k7j77"]
 atlas = ExtResource("1_yc6ev")
 region = Rect2(1800, 0, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tf6b7"]
+atlas = ExtResource("1_yc6ev")
+region = Rect2(0, 600, 300, 300)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4uef7"]
 atlas = ExtResource("1_yc6ev")
@@ -444,6 +523,10 @@ region = Rect2(1800, 300, 300, 300)
 [sub_resource type="AtlasTexture" id="AtlasTexture_7np10"]
 atlas = ExtResource("1_yc6ev")
 region = Rect2(900, 600, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_13lek"]
+atlas = ExtResource("1_yc6ev")
+region = Rect2(300, 600, 300, 300)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vp2n1"]
 atlas = ExtResource("1_yc6ev")
@@ -489,6 +572,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_tf6b7")
+}],
+"loop": true,
+"name": &"HITSTUN",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_4uef7")
 }, {
 "duration": 1.0,
@@ -516,6 +607,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_13lek")
+}],
+"loop": true,
+"name": &"TUMBLE",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_vp2n1")
 }, {
 "duration": 1.0,
@@ -536,23 +635,44 @@ animations = [{
 radius = 12.0
 height = 64.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_13lek"]
+radius = 25.0
+
 [sub_resource type="LabelSettings" id="LabelSettings_nkdak"]
 font_size = 12
 font_color = Color(0, 0, 0, 1)
 
-[node name="Rob" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "animations", "rcGroundL", "rcGroundR", "rcLedgeGrabF", "rcLedgeGrabB", "stateMachine")]
+[node name="Rob" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "animations", "collision", "tumbleCollision", "tumbleSmoke", "rcGroundL", "rcGroundR", "rcLedgeGrabF", "rcLedgeGrabB", "stateMachine")]
 collision_mask = 6
 platform_floor_layers = 4294901766
 platform_wall_layers = 2
 script = ExtResource("1_4uef7")
 sprite = NodePath("AnimatedSprite2D")
 animations = NodePath("AnimationPlayer")
+collision = NodePath("Collision")
+tumbleCollision = NodePath("TumbleCollision")
+tumbleSmoke = NodePath("TumbleSmoke")
 rcGroundL = NodePath("GroundL")
 rcGroundR = NodePath("GroundR")
 rcLedgeGrabF = NodePath("Ledge_Grab_F")
 rcLedgeGrabB = NodePath("Ledge_Grab_B")
 stateMachine = NodePath("StateMachine")
 atts = ExtResource("2_tigya")
+
+[node name="TumbleSmoke" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_s6tx8")
+emitting = false
+amount = 50
+texture = ExtResource("31_s6tx8")
+lifetime = 0.5
+emission_shape = 1
+emission_sphere_radius = 14.2
+gravity = Vector2(0, 0)
+angle_min = -297.5
+angle_max = 432.7
+scale_amount_min = 0.4
+scale_amount_curve = SubResource("Curve_c6kbh")
+color_ramp = SubResource("Gradient_5b2vd")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -567,6 +687,10 @@ animation = &"JUMP"
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 7)
 shape = SubResource("CapsuleShape2D_4uef7")
+
+[node name="TumbleCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_13lek")
+disabled = true
 
 [node name="GroundL" type="RayCast2D" parent="."]
 position = Vector2(-10, 31)
@@ -671,6 +795,10 @@ metadata/_custom_type_script = "uid://cytot4872pgis"
 [node name="HITSTUN" type="Node" parent="StateMachine"]
 script = ExtResource("27_tf6b7")
 metadata/_custom_type_script = "uid://ddij2qopeccv4"
+
+[node name="TUMBLE" type="Node" parent="StateMachine"]
+script = ExtResource("28_13lek")
+metadata/_custom_type_script = "uid://cxg1jun1bwwpi"
 
 [node name="Label" type="Label" parent="."]
 offset_left = -83.0
