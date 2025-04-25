@@ -1,0 +1,71 @@
+[gd_scene load_steps=11 format=3 uid="uid://ckokqdu6ldrfv"]
+
+[ext_resource type="Texture2D" uid="uid://lqt76p8owsid" path="res://effects/assets/common/ptc_cmn_smokeB.png" id="1_1ob17"]
+[ext_resource type="Script" uid="uid://cvqeypd03lvt8" path="res://effects/tumble_smoke.gd" id="1_78rf2"]
+[ext_resource type="Texture2D" uid="uid://djdcvxpg643i0" path="res://effects/assets/common/ptc_cmn_smokeH.png" id="2_pwjg7"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1ob17"]
+blend_mode = 1
+
+[sub_resource type="Curve" id="Curve_78rf2"]
+_data = [Vector2(0, 0.222296), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_78rf2"]
+colors = PackedColorArray(0.546968, 0.546968, 0.546968, 1, 1, 1, 1, 0)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dn2aq"]
+
+[sub_resource type="Gradient" id="Gradient_wqf4b"]
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_il527"]
+load_path = "res://.godot/imported/ptc_cmn_smokeH.png-2e225dd2d519e3684e438b0302edfc8d.ctex"
+
+[sub_resource type="Gradient" id="Gradient_ke26v"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[node name="TumbleSmoke" type="Node2D"]
+script = ExtResource("1_78rf2")
+
+[node name="1" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_1ob17")
+amount = 50
+texture = ExtResource("1_1ob17")
+lifetime = 0.5
+emission_shape = 1
+emission_sphere_radius = 14.2
+gravity = Vector2(0, 0)
+angle_min = -297.5
+angle_max = 432.7
+scale_amount_min = 0.4
+scale_amount_max = 0.6
+scale_amount_curve = SubResource("Curve_78rf2")
+color_ramp = SubResource("Gradient_78rf2")
+
+[node name="2" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_dn2aq")
+amount = 50
+texture = ExtResource("2_pwjg7")
+lifetime = 0.5
+emission_shape = 1
+emission_sphere_radius = 6.98
+gravity = Vector2(0, 0)
+angle_min = -297.5
+angle_max = 432.7
+scale_amount_min = 0.4
+scale_amount_curve = SubResource("Curve_78rf2")
+color_ramp = SubResource("Gradient_wqf4b")
+
+[node name="3" type="CPUParticles2D" parent="."]
+amount = 50
+texture = SubResource("CompressedTexture2D_il527")
+lifetime = 0.5
+emission_shape = 1
+emission_sphere_radius = 12.03
+gravity = Vector2(0, 0)
+angle_min = -186.8
+angle_max = 459.7
+scale_amount_min = 0.2
+scale_amount_max = 0.5
+color_ramp = SubResource("Gradient_ke26v")

@@ -5,7 +5,7 @@ class_name Fighter extends CharacterBody2D
 
 @export var collision: CollisionShape2D
 @export var tumbleCollision: CollisionShape2D
-@export var tumbleSmoke: CPUParticles2D
+@export var tumbleSmoke: TumbleSmoke
 @export var rcGroundL: RayCast2D
 @export var rcGroundR: RayCast2D
 @export var rcLedgeGrabF: LedgeScan
@@ -23,17 +23,15 @@ var alive = true
 var hideCamera = false
 var dropFromY = 0
 var facingRight = true
-var percentage = 200
+var percentage = 0
 var stocks = 3
-var knockback = FighterKnockback.new()
+var knockback = FighterKnockback.new(self)
+var freeze = FreezFrames.new(self)
 
 var grabbingLedge: Ledge = null
 var regrabPause = 0
 
 var _wallBounce = preload("res://effects/wall_bounce.tscn")
-
-func _ready() -> void:
-	knockback.fighter = self
 
 func _physics_process(delta: float) -> void:
 	# make sure the ground raycasts always point downwards, even if character is rotated

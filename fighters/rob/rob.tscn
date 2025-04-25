@@ -1,10 +1,11 @@
-[gd_scene load_steps=64 format=3 uid="uid://7kqs61vfi3ad"]
+[gd_scene load_steps=61 format=3 uid="uid://7kqs61vfi3ad"]
 
 [ext_resource type="Script" uid="uid://cjtbpjucyo6s4" path="res://fighters/rob/rob.gd" id="1_4uef7"]
 [ext_resource type="Texture2D" uid="uid://4f3nv8q0p483" path="res://fighters/rob/rob_spriteset.png" id="1_yc6ev"]
 [ext_resource type="Resource" uid="uid://dmylagf7ai8kr" path="res://fighters/rob/rob_attributes.tres" id="2_tigya"]
 [ext_resource type="Script" uid="uid://ke4muv8411gh" path="res://fighters/_global/state/state_machine.gd" id="3_nrq36"]
 [ext_resource type="Script" uid="uid://c1lifl0lw2ftt" path="res://fighters/_hitboxes/hitbox_attributes.gd" id="3_qy7ub"]
+[ext_resource type="PackedScene" uid="uid://ckokqdu6ldrfv" path="res://effects/tumble_smoke.tscn" id="3_s6tx8"]
 [ext_resource type="Script" uid="uid://dc606m8v2oyya" path="res://fighters/_states/stand.gd" id="4_78bka"]
 [ext_resource type="Script" uid="uid://clo5n5scj7ifr" path="res://fighters/_states/dash.gd" id="5_8gid5"]
 [ext_resource type="Script" uid="uid://d35l2jsa02c85" path="res://fighters/_states/air.gd" id="6_nkdak"]
@@ -30,18 +31,6 @@
 [ext_resource type="PackedScene" uid="uid://b8rhaa8fv4mdc" path="res://fighters/_hitboxes/hitbox_pool.tscn" id="26_7np10"]
 [ext_resource type="Script" uid="uid://ddij2qopeccv4" path="res://fighters/_states/hitstun.gd" id="27_tf6b7"]
 [ext_resource type="Script" uid="uid://cxg1jun1bwwpi" path="res://fighters/_states/tumble.gd" id="28_13lek"]
-[ext_resource type="Texture2D" uid="uid://lqt76p8owsid" path="res://effects/assets/common/ptc_cmn_smokeB.png" id="31_s6tx8"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_s6tx8"]
-blend_mode = 1
-
-[sub_resource type="Curve" id="Curve_c6kbh"]
-_data = [Vector2(0, 0.222296), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Gradient" id="Gradient_5b2vd"]
-offsets = PackedFloat32Array(0, 0.981873)
-colors = PackedColorArray(0.47788, 0.47788, 0.47788, 1, 0.377919, 0.377919, 0.377919, 0)
 
 [sub_resource type="Animation" id="Animation_vp2n1"]
 resource_name = "AIR"
@@ -75,9 +64,9 @@ tracks/1/keys = {
 
 [sub_resource type="Resource" id="Resource_tf6b7"]
 script = ExtResource("3_qy7ub")
-damage = 10
-knockbackBase = 100
-knockbackScaling = 2.0
+damage = 3
+knockbackBase = 20
+knockbackGrowth = 60
 hitlag = 1
 type = 0
 angleCalc = 1
@@ -659,20 +648,7 @@ rcLedgeGrabB = NodePath("Ledge_Grab_B")
 stateMachine = NodePath("StateMachine")
 atts = ExtResource("2_tigya")
 
-[node name="TumbleSmoke" type="CPUParticles2D" parent="."]
-material = SubResource("CanvasItemMaterial_s6tx8")
-emitting = false
-amount = 50
-texture = ExtResource("31_s6tx8")
-lifetime = 0.5
-emission_shape = 1
-emission_sphere_radius = 14.2
-gravity = Vector2(0, 0)
-angle_min = -297.5
-angle_max = 432.7
-scale_amount_min = 0.4
-scale_amount_curve = SubResource("Curve_c6kbh")
-color_ramp = SubResource("Gradient_5b2vd")
+[node name="TumbleSmoke" parent="." instance=ExtResource("3_s6tx8")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -680,12 +656,12 @@ libraries = {
 }
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -6)
 scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_78bka")
 animation = &"JUMP"
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2(0, 7)
 shape = SubResource("CapsuleShape2D_4uef7")
 
 [node name="TumbleCollision" type="CollisionShape2D" parent="."]
@@ -693,12 +669,12 @@ shape = SubResource("CircleShape2D_13lek")
 disabled = true
 
 [node name="GroundL" type="RayCast2D" parent="."]
-position = Vector2(-10, 31)
+position = Vector2(-10, 25)
 target_position = Vector2(0, 10)
 collision_mask = 6
 
 [node name="GroundR" type="RayCast2D" parent="."]
-position = Vector2(10, 31)
+position = Vector2(10, 25)
 target_position = Vector2(0, 10)
 collision_mask = 6
 
@@ -810,7 +786,7 @@ label_settings = SubResource("LabelSettings_nkdak")
 horizontal_alignment = 1
 
 [node name="Ledge_Grab_F" type="RayCast2D" parent="."]
-position = Vector2(6, -18)
+position = Vector2(6, -24)
 target_position = Vector2(23, 0)
 collision_mask = 8
 hit_from_inside = true
@@ -820,7 +796,7 @@ script = ExtResource("25_aqnwf")
 metadata/_custom_type_script = "uid://bxyupbll7v46a"
 
 [node name="Ledge_Grab_B" type="RayCast2D" parent="."]
-position = Vector2(-1, -20)
+position = Vector2(-1, -26)
 target_position = Vector2(-17, 0)
 collision_mask = 8
 hit_from_inside = true

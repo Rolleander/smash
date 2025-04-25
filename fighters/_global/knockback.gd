@@ -6,14 +6,20 @@ var knockback = 0
 var hitstun = 0
 var fighter: Fighter
 
-const ratio = 0.04
 
+const RATIO = 1.0
+const LAUNCH_V = 10
+const DECAY = 0.051
+
+func _init(fighter : Fighter) -> void:
+	self.fighter = fighter
+	
 func reset():
 	knockback = 0
 	hitstun = 0
 
 func apply(angle: float, box: HitboxAttributes, from: Fighter):
-	var power = _calc_knockback(fighter.percentage, box.damage, fighter.atts.weight, box.knockbackScaling, box.knockbackBase)
+	var power = _calc_knockback(fighter.percentage, box.damage, fighter.atts.weight, box.knockbackGrowth, box.knockbackBase)
 	print("power ", power)
 	angle = _calc_angle(angle, box.angleCalc, from)
 	print("angle ", angle)
@@ -26,27 +32,29 @@ func apply(angle: float, box: HitboxAttributes, from: Fighter):
 	hitstun = _calc_hitstun(power)
 	print("hitstun ", hitstun)
 	knockback = power
-	if power >= 18:
+	if power >= 40:
 		fighter.stateMachine._transition_to_next_state("TUMBLE")
 	else:
 		fighter.stateMachine._transition_to_next_state("HITSTUN")
+	fighter.freeze.applyToTarget(box)
+	from.freeze.applyToSource(box)
 
 func _calc_angle(angle: float, calc: HitboxAttributes.AngleCalc, source: Fighter):
 	match calc:
 		HitboxAttributes.AngleCalc.SET:
 			return angle
-		HitboxAttributes.AngleCalc.AWAY_FROM_PLAYER:
+		HitboxAttributes.AngleCalc.PUSH_AWAY:
 			return rad_to_deg((fighter.global_position - source.global_position).angle())
-		HitboxAttributes.AngleCalc.TOWARDS_PLAYER:
+		HitboxAttributes.AngleCalc.PULL_INWARDS:
 			return rad_to_deg((source.global_position - fighter.global_position).angle())
 		
-func _calc_knockback(percentage, damage, weight, knockbackScaling, knockbackBase):
-	var p = percentage
+func _calc_knockback(percentage, damage, weight, knockbackGrowth, knockbackBase):
+	var p = percentage + damage
 	var d = damage
 	var w = weight
-	var s = knockbackScaling
+	var s = knockbackGrowth / 100.0
 	var b = knockbackBase
-	var r = ratio
+	var r = RATIO
 	#melee onward formula
 	return (((((p / 10.0) + ((p * d) / 20.0)) * (200.0 / (w + 100.0) * 1.4) + 18.0) * s) + b) * r
 
@@ -58,26 +66,23 @@ func _throw(hVelocity, vVelocity, hDecay, vDecay):
 	self.vdecay = vDecay
 	print("throw ", hVelocity, " - ", vVelocity, "   ", hdecay, " - ", vDecay)
 
-const initialV = 30
 
 func _calc_hitstun(power):
-	return floor(power / 0.3 * 0.4)
+	return floor(power * 0.4)
 
 func _calc_horizontal_decay(angle):
-	var decay = 0.051 * cos(deg_to_rad(angle))
+	var decay = DECAY * cos(deg_to_rad(angle))
 	return abs(_round_up(decay) * 1000)
 
 func _calc_vertical_decay(angle):
-	var decay = 0.051 * sin(deg_to_rad(angle))
+	var decay = DECAY * sin(deg_to_rad(angle))
 	return abs(_round_up(decay) * 1000)
 
 func _calc_horizontal_velocity(power, angle):
-	var initial = power * initialV
-	return _round_up(initial * cos(deg_to_rad(angle)))
+	return _round_up(power * LAUNCH_V * cos(deg_to_rad(angle)))
 
 func _calc_vertical_velocity(power, angle):
-	var initial = power * initialV
-	return _round_up(initial * sin(deg_to_rad(angle)))
+	return _round_up(power * LAUNCH_V * sin(deg_to_rad(angle)))
 
 func _round_up(a):
 	return round(a * 100000) / 100000

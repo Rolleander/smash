@@ -6,13 +6,13 @@ enum Type {
 
 enum AngleCalc {
 	SET,
-	AWAY_FROM_PLAYER,
-	TOWARDS_PLAYER
+	PUSH_AWAY,
+	PULL_INWARDS
 }
 
-@export var damage = 10
-@export var knockbackBase = 100
-@export var knockbackScaling = 2.0
+@export var damage = 3
+@export var knockbackBase = 20
+@export var knockbackGrowth = 60
 @export var hitlag = 1
 @export var type = Type.NORMAL
 @export var angleCalc = AngleCalc.SET

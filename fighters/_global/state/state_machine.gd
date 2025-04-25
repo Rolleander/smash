@@ -20,6 +20,9 @@ func _ready() -> void:
 	fighter.state = state.name
 
 func _physics_process(delta: float) -> void:
+	if fighter.freeze.duration > 0:
+		fighter.freeze.update()
+		return
 	if fighter.isLanding():
 		_transition_to_next_state("LANDING")
 	elif fighter.isFalling():

@@ -7,8 +7,7 @@ func enter(previous_state_path: String):
 	fighter.enablePlatformCollision(false)
 	fighter.collision.set_deferred("disabled", true)
 	fighter.tumbleCollision.set_deferred("disabled", false)
-	fighter.tumbleSmoke.amount = min(200, round(fighter.knockback.knockback * 3))
-	fighter.tumbleSmoke.emitting = true
+	fighter.tumbleSmoke.start((fighter.knockback.knockback - 40) * 0.05)
 	fighter.fastFall = false
 	var rotateRight = fighter.velocity.x > 0
 	rotateSpeed = min(fighter.knockback.knockback * 1.5, 30)
@@ -18,10 +17,9 @@ func enter(previous_state_path: String):
 	fighter.animation("TUMBLE", true)
 
 func exit() -> void:
-	fighter.knockback.reset()
 	fighter.collision.set_deferred("disabled", false)
 	fighter.tumbleCollision.set_deferred("disabled", true)
-	fighter.tumbleSmoke.emitting = false
+	fighter.tumbleSmoke.stop()
 
 func endTumble():
 	fighter.rotation = 0

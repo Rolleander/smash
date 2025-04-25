@@ -8,7 +8,7 @@ func enter(previous_state_path: String):
 	fighter.animation("HITSTUN", true)
 
 func exit() -> void:
-	fighter.knockback.reset()
+	pass
 
 func update(delta: float):
 	if fighter.knockback.knockback >= 3:

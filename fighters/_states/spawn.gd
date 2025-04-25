@@ -9,7 +9,7 @@ func enter(previous_state_path: String):
 	fighter.hideCamera = false
 	fighter.rotation = 0
 	fighter.global_position = Vector2(0, 0)
-	fighter.tumbleSmoke.emitting = false
+	fighter.tumbleSmoke.stop()
 
 
 func update(_delta: float):
