@@ -12,7 +12,7 @@ func exit() -> void:
 
 func update(delta: float):
 	if fighter.knockback.knockback >= 3:
-		if fighter.surfaceBounce(delta, 0.8):
+		if Collision.checkSurfaceBounce(fighter, delta, 0.8) == Collision.BounceResult.BOUNCE:
 			bounced = true
 	if bounced:
 		fighter.dampenHorizontalMovement(fighter.atts.airAcceleration / 5.0)

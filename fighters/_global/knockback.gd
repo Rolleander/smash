@@ -6,9 +6,8 @@ var knockback = 0
 var hitstun = 0
 var fighter: Fighter
 
-
 const RATIO = 1.0
-const LAUNCH_V = 10
+const LAUNCH_V = 30
 const DECAY = 0.051
 
 func _init(fighter : Fighter) -> void:
@@ -32,12 +31,14 @@ func apply(angle: float, box: HitboxAttributes, from: Fighter):
 	hitstun = _calc_hitstun(power)
 	print("hitstun ", hitstun)
 	knockback = power
-	if power >= 40:
+	if power >= 20:
 		fighter.stateMachine._transition_to_next_state("TUMBLE")
 	else:
 		fighter.stateMachine._transition_to_next_state("HITSTUN")
 	fighter.freeze.applyToTarget(box)
 	from.freeze.applyToSource(box)
+	return angle
+	
 
 func _calc_angle(angle: float, calc: HitboxAttributes.AngleCalc, source: Fighter):
 	match calc:
@@ -85,4 +86,4 @@ func _calc_vertical_velocity(power, angle):
 	return _round_up(power * LAUNCH_V * sin(deg_to_rad(angle)))
 
 func _round_up(a):
-	return round(a * 100000) / 100000
+	return round(a)

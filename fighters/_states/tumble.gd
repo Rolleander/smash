@@ -1,6 +1,7 @@
 class_name TUMBLE extends AIR
 
 var rotateSpeed = 0.0
+const fallSlowdown = 0.5
 
 func enter(previous_state_path: String):
 	fighter.dropFromY = fighter.global_position.y
@@ -25,22 +26,16 @@ func endTumble():
 	fighter.rotation = 0
 	next("LANDING")
 
-func reduceRotation():
-	pass
-	#rotateSpeed *= 0.5
-	#if abs(rotateSpeed) < 0.5:
-		#rotateSpeed = 0
-
 func update(delta: float):
 	fighter.rotation += rotateSpeed * delta
 	if frame < fighter.knockback.hitstun:
-		if fighter.surfaceBounce(delta, 0.8):
-			reduceRotation()
-		air_movement(false, 0)
+		Collision.checkSurfaceBounce(fighter, delta, 0.8)
+		air_movement(false, 0, fallSlowdown)
 		return
-
-	if fighter.surfaceBounce(delta, 0.6):
-		reduceRotation()
-	air_movement(false, 0.5)
-	if fighter.velocity.length() <= fighter.atts.fallAcceleration * 4:
+	
+	var bounce = Collision.checkSurfaceBounce(fighter, delta, 0.6)
+	if bounce == Collision.BounceResult.SLIDE or (bounce == Collision.BounceResult.BOUNCE and abs(fighter.velocity.y) <= 300):
 		endTumble()
+		return
+		
+	air_movement(false, 0.5, fallSlowdown)

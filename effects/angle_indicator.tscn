@@ -1,0 +1,148 @@
+[gd_scene load_steps=10 format=3 uid="uid://cldwd0fgyoqvt"]
+
+[ext_resource type="Script" uid="uid://dg8pacsfxaj2o" path="res://effects/v_effect.gd" id="1_s6say"]
+[ext_resource type="Texture2D" uid="uid://dqrcglt2dy75p" path="res://effects/assets/common/ptc_cmn_shockA.png" id="2_dqdq6"]
+[ext_resource type="Texture2D" uid="uid://2d2oeketqj2r" path="res://effects/assets/common/ptc_cmn_flashB.png" id="2_s6say"]
+[ext_resource type="Texture2D" uid="uid://7nxe4tu47m6m" path="res://effects/assets/common/ptc_cmn_piyopiyo_03.png" id="4_q5vxv"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_r0t5u"]
+blend_mode = 1
+
+[sub_resource type="Animation" id="Animation_yp3pf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PtcCmnShockA:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PtcCmnFlashB:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PtcCmnPiyopiyo03:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_1sk05"]
+resource_name = "animation"
+length = 0.333337
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PtcCmnShockA:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.1, 0.2), Vector2(0.5, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.537255), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PtcCmnFlashB:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.266667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.2, 0.2)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PtcCmnPiyopiyo03:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wgtnm"]
+_data = {
+&"RESET": SubResource("Animation_yp3pf"),
+&"animation": SubResource("Animation_1sk05")
+}
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bbc3a"]
+blend_mode = 1
+
+[node name="AngleIndicator" type="Node2D" node_paths=PackedStringArray("player")]
+script = ExtResource("1_s6say")
+player = NodePath("AnimationPlayer")
+metadata/_custom_type_script = "uid://dg8pacsfxaj2o"
+
+[node name="PtcCmnShockA" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_r0t5u")
+texture = ExtResource("2_dqdq6")
+offset = Vector2(0, 64)
+flip_v = true
+
+[node name="PtcCmnFlashB" type="Sprite2D" parent="."]
+rotation = -1.06116
+texture = ExtResource("2_s6say")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_wgtnm")
+}
+autoplay = "animation"
+
+[node name="PtcCmnPiyopiyo03" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 0, 1)
+material = SubResource("CanvasItemMaterial_bbc3a")
+rotation = -0.801106
+texture = ExtResource("4_q5vxv")

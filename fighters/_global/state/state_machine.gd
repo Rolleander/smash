@@ -36,6 +36,8 @@ func _physics_process(delta: float) -> void:
 			_transition_to_next_state("LEDGE_CATCH")
 	if fighter.regrabPause > 0:
 		fighter.regrabPause -= 1
+		
+	fighter.flickScan.update()
 	if next_state:
 		var previous_state_path := state.name
 		state = next_state

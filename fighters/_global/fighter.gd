@@ -15,6 +15,7 @@ class_name Fighter extends CharacterBody2D
 @export var atts: FighterAttributes
 
 var state: String
+var action : int
 var lagFrames = 0
 var fastFall = false
 var airJumps = 0
@@ -31,7 +32,7 @@ var freeze = FreezFrames.new(self)
 var grabbingLedge: Ledge = null
 var regrabPause = 0
 
-var _wallBounce = preload("res://effects/wall_bounce.tscn")
+var flickScan = FlickScan.new(self, 3)
 
 func _physics_process(delta: float) -> void:
 	# make sure the ground raycasts always point downwards, even if character is rotated
@@ -153,20 +154,3 @@ func applySlopeVerticalSpeed():
 	#check for downwards slope normal
 	if (facingRight && slope_direction.y < 0) || (!facingRight && slope_direction.y > 0):
 		velocity.y = max(15, abs(velocity.x) * abs(slope_direction.y) * 2)
-
-func surfaceBounce(delta: float, slowDownFactor = 0.8):
-	var bounce = move_and_collide(velocity * delta, true, 0.08, true)
-	if bounce:
-		var normal = bounce.get_normal()
-		var vel_dir = velocity.normalized()
-		var impact = abs(vel_dir.dot(normal))  
-		# 1 = full head-on, 0 = sliding
-		if impact >= 0.4:
-			velocity = velocity.bounce(normal) * slowDownFactor
-			knockback.hitstun = round(knockback.hitstun * slowDownFactor)
-			var effect = _wallBounce.instantiate()
-			effect.global_position = bounce.get_position()
-			print("impact ", impact)
-			get_tree().get_first_node_in_group("veffects_node").add_child(effect)
-			return true
-	return false

@@ -21,6 +21,7 @@ CInput="*res://fighters/_global/c_input.gd"
 StageUtils="*res://stages/_global/stage_utils.gd"
 Events="*res://global/events.gd"
 Sounds="*res://sounds/sounds.gd"
+Collision="*res://fighters/_global/collision.gd"
 
 [display]
 

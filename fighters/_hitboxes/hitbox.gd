@@ -7,6 +7,8 @@ var frame = 0
 var hitList = []
 var sourceState: String
 
+var angleEffect = preload("res://effects/angle_indicator.tscn")
+
 func _init(source: Fighter, atts: HitboxAttributes, angle: float) -> void:
 	self.source = source
 	self.atts = atts
@@ -26,7 +28,16 @@ func _hit(body: Node2D):
 			return
 		hitList.append(fighter)
 		_fighter_hit(fighter)
-		
+
 func _fighter_hit(fighter: Fighter):
 	fighter.percentage += atts.damage
-	fighter.knockback.apply(angle, atts, source)
+	var angle = fighter.knockback.apply(angle, atts, source)
+	var effect = angleEffect.instantiate()
+	var hitboxPos = get_child(0).global_position
+	effect.global_position = fighter.global_position.lerp(hitboxPos, 0.5)
+	effect.rotation = deg_to_rad(angle - 90)
+	var scale = clamp(fighter.knockback.knockback * 0.01, 0.5, 1)
+	effect.scale = Vector2(scale, scale) 
+	get_tree().get_first_node_in_group("veffects_node").add_child(effect)
+	
+	

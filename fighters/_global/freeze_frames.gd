@@ -11,14 +11,14 @@ func _init(fighter : Fighter) -> void:
 	self.fighter = fighter
 
 func update():
+	if shaking and (floori(duration) % 5 == 0):
+		var shake_strength = min(frames * 0.15, 5)
+		var offset = Vector2(randf_range(-1, 1), randf_range(-1, 1)) * shake_strength
+		fighter.sprite.position += offset				
+	duration -=1			
 	if duration <=0:
 		_restore()
 		return
-	if shaking and (floori(duration) % 4 == 0):
-		var shake_strength = min(frames * 0.15, 15)
-		var offset = Vector2(randf_range(-1, 1), randf_range(-1, 1)) * shake_strength
-		fighter.global_position += offset				
-	duration -=1			
 
 func applyToSource(atts : HitboxAttributes):
 	_apply(atts)
@@ -29,6 +29,7 @@ func applyToTarget(atts : HitboxAttributes):
 	_apply(atts)
 	shaking = true
 	fighter.animation("HITSTUN", true)
+	fighter.sprite.position = Vector2(0,0)
 	
 func _apply(atts : HitboxAttributes):
 	var length = _calc_hitlag(atts)
@@ -39,6 +40,8 @@ func _apply(atts : HitboxAttributes):
 	originalVel = fighter.velocity
 
 func _restore():
+	if shaking:
+		fighter.sprite.position = Vector2(0,0)
 	fighter.global_position = originalPos
 	fighter.velocity = originalVel
 	fighter.animations.play()

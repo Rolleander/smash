@@ -27,11 +27,11 @@ func update(_delta: float) -> void:
 		if CInput.pressed(fighter, CInput.CTRL.RIGHT):
 			fighter.velocity.x = fighter.atts.maxAirSpeed
 
-func air_movement(allowTurning = true, steerFactor = 1.0):
+func air_movement(allowTurning = true, steerFactor = 1.0, fallFactor = 1.0):
 	if fighter.velocity.y < 0:
 		fighter.dropFromY = fighter.global_position.y
 	if fighter.velocity.y < fighter.atts.fallSpeed:
-		fighter.velocity.y += fighter.atts.fallAcceleration
+		fighter.velocity.y += fighter.atts.fallAcceleration * fallFactor
 		fighter.velocity.y = clamp(fighter.velocity.y, fighter.velocity.y, fighter.atts.fallSpeed)
 	if steerFactor == 0 || !_air_steering(allowTurning, steerFactor):
 		fighter.dampenHorizontalMovement(fighter.atts.airAcceleration / 5.0)
