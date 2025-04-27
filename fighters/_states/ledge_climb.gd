@@ -6,6 +6,7 @@ func enter(previous_state_path: String):
 	pass
 
 func update(_delta: float):
+	super.update(_delta)
 	if frame % 4 == 0:
 		fighter.position.y += climbSpeed
 	if frame > 15 && frame % 3 == 0:

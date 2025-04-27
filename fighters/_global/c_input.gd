@@ -22,6 +22,9 @@ func value(fighter: Fighter, ctrl: String):
 func pressed(fighter: Fighter, ctrl: String, min: float = 0.8):
 	return value(fighter, ctrl) >= min
 
+func justReleased(fighter: Fighter, ctrl: String):
+	return Input.is_action_just_released(str(fighter.controllerId) + "_" + ctrl)
+
 func justPressed(fighter: Fighter, ctrl: String):
 	return Input.is_action_just_pressed(str(fighter.controllerId) + "_" + ctrl)
 

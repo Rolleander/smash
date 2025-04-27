@@ -14,6 +14,7 @@ var _attackPressed = false
 var _frame = 0
 var _moveStart = 0
 var _zeroed = false
+var _attackReleased = true
 
 const FLICK_V = 0.9
 const DEADZONE = 0.4
@@ -29,8 +30,12 @@ func update():
 		_zeroed = true
 	elif _zeroed and _moveStart == 0:
 		_moveStart =_frame	 
-	if CInput.justPressed(_fighter, CInput.CTRL.ATTACK):
+	if !CInput.pressed(_fighter, CInput.CTRL.ATTACK):
+		_attackReleased = true
+		_attackPressed = false
+	if _attackReleased and CInput.pressed(_fighter, CInput.CTRL.ATTACK):
 		_attackPressed = true		
+		_attackReleased = false
 	if _zeroed:
 		if valueX >= FLICK_V:
 			_flicked = DIR.RIGHT
@@ -45,20 +50,23 @@ func update():
 		_reset()
 
 func _reset():
-		_attackPressed = false
-		_frame = 0
-		_flicked = null
-		_zeroed = false
-		_moveStart = 0
+	_frame = 0
+	_flicked = null
+	_zeroed = false
+	_moveStart = 0
+
+func consumeAttack():
+	_attackPressed = false
+	_attackReleased = false
 
 func _end_frame():
 	return _window + _moveStart
 
-func _complete():
+func complete():
 	return _frame == _end_frame()
 
 func flicked():
-	if !_complete():
+	if !complete():
 		return null
 	return _flicked 
 	
@@ -66,4 +74,4 @@ func wantsAttack():
 	return _attackPressed
 
 func noFlick():
-	return _complete() && _flicked == null
+	return complete() && _flicked == null

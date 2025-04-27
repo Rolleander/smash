@@ -5,6 +5,7 @@ func enter(previous_state_path: String):
 	fighter.fastFall = false
 
 func update(_delta: float):
+	super.update(_delta)
 	if frame > 7:
 		fighter.lagFrames = 0
 		fighter.airJumps = 0

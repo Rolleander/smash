@@ -4,6 +4,7 @@ var sound = preload("res://sounds/fx/Powp.wav")
 var dustEffect = preload("res://effects/jump.tscn")
 
 func update(_delta: float) -> void:
+	super.update(_delta)
 	if frame <= fighter.atts.landingFrames + fighter.lagFrames:
 		if frame == 1:
 			pass

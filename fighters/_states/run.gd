@@ -1,7 +1,7 @@
-class_name RUN extends State
+class_name RUN extends GroundState
 
 const MIN_W = 0.5
-const BRAKE_WAIT = 5 # frames to wait without input before braking
+const BRAKE_WAIT = 3 # frames to wait without input before braking
 
 var brake_f = 0
 var dust = preload("res://effects/run_dust.tscn")
@@ -10,6 +10,7 @@ func enter(previous_state_path: String):
 	pass
 
 func update(_delta: float) -> void:
+	super.update(_delta)
 	fighter.animation("WALK")
 	Sounds.playFootSteps(fighter, frame, 7)
 	if frame % 4 == 0:

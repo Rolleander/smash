@@ -64,7 +64,7 @@ func isFalling() -> bool:
 	return inState(["STAND", "DASH", "RUN", "WALK"]) and not rcGroundL.is_colliding() and not rcGroundR.is_colliding()
 
 func isWalking() -> bool:
-	return inState(["RUN", "WALK", "DASH", "TURN", "BRAKE"])
+	return inState(["RUN", "WALK", "DASH", "TURN", "BRAKE", "ATTACK"])
 
 func shouldGrabLedge():
 	if !inState(["AIR"]):
@@ -108,10 +108,10 @@ func inState(states: Array[String]):
 func dampenHorizontalMovement(slowdown: float = atts.traction):
 	if velocity.x > 0:
 		velocity.x += -slowdown
-		velocity.x = clamp(velocity.x, 0, velocity.x)
+		velocity.x = max(velocity.x, 0)
 	elif velocity.x < 0:
 		velocity.x += slowdown
-		velocity.x = clamp(velocity.x, velocity.x, 0)
+		velocity.x = min(velocity.x, 0)
 
 func veffect(effect: VEffect, offset: Vector2 = Vector2(0, 0)):
 	effect.global_position = global_position + offset

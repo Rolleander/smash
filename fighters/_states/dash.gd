@@ -1,4 +1,4 @@
-class_name DASH extends State
+class_name DASH extends GroundState
 
 var sound = preload("res://sounds/fx/Swiff.wav")
 var dustEffect = preload("res://effects/dash_dust.tscn")
@@ -29,6 +29,8 @@ func enter(previous_state_path: String):
 	fighter.velocity.y = 0
 
 func update(_delta: float) -> void:
+	super.update(_delta)
+	
 	if fighter.facingRight:
 		fighter.rcGroundR.target_position.y = rcLengthR + rcPlus
 		fighter.rcGroundL.target_position.y = rcLengthL
@@ -38,6 +40,10 @@ func update(_delta: float) -> void:
 
 	if CInput.justPressed(fighter, CInput.CTRL.JUMP):
 		return next("JUMP_SQUAT")
+		
+	if CInput.justPressed(fighter, CInput.CTRL.ATTACK):
+		fighter.action = ATTACK.Type.DASH
+		return next("ATTACK")
 
 	if frame >= fighter.atts.dashFrames - 1:
 		return next("RUN")

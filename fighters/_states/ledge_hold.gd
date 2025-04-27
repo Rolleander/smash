@@ -6,6 +6,7 @@ func enter(previous_state_path: String):
 	pass
 
 func update(_delta: float):
+	super.update(_delta)
 	if frame >= 390: # 3.5 sec
 		return letGo(false)
 	if CInput.justPressed(fighter, CInput.CTRL.DOWN):

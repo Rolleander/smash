@@ -13,6 +13,7 @@ func enter(previous_state_path: String):
 
 
 func update(_delta: float):
+	super.update(_delta)
 	if frame == 60:
 		next("AIR")
 		fighter.collision.set_deferred("disabled", false)

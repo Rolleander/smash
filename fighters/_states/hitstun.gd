@@ -11,6 +11,7 @@ func exit() -> void:
 	pass
 
 func update(delta: float):
+	super.update(delta)
 	if fighter.knockback.knockback >= 3:
 		if Collision.checkSurfaceBounce(fighter, delta, 0.8) == Collision.BounceResult.BOUNCE:
 			bounced = true

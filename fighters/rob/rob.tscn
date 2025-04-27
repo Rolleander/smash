@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://7kqs61vfi3ad"]
+[gd_scene load_steps=65 format=3 uid="uid://7kqs61vfi3ad"]
 
 [ext_resource type="Script" uid="uid://cjtbpjucyo6s4" path="res://fighters/rob/rob.gd" id="1_4uef7"]
 [ext_resource type="Texture2D" uid="uid://4f3nv8q0p483" path="res://fighters/rob/rob_spriteset.png" id="1_yc6ev"]
@@ -31,6 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://b8rhaa8fv4mdc" path="res://fighters/_hitboxes/hitbox_pool.tscn" id="26_7np10"]
 [ext_resource type="Script" uid="uid://ddij2qopeccv4" path="res://fighters/_states/hitstun.gd" id="27_tf6b7"]
 [ext_resource type="Script" uid="uid://cxg1jun1bwwpi" path="res://fighters/_states/tumble.gd" id="28_13lek"]
+[ext_resource type="Script" uid="uid://b3br36t36dvk7" path="res://fighters/_states/air_attack.gd" id="30_5b2vd"]
 
 [sub_resource type="Animation" id="Animation_vp2n1"]
 resource_name = "AIR"
@@ -900,6 +901,10 @@ metadata/_custom_type_script = "uid://ddij2qopeccv4"
 [node name="TUMBLE" type="Node" parent="StateMachine"]
 script = ExtResource("28_13lek")
 metadata/_custom_type_script = "uid://cxg1jun1bwwpi"
+
+[node name="AIR_ATTACK" type="Node" parent="StateMachine"]
+script = ExtResource("30_5b2vd")
+metadata/_custom_type_script = "uid://b3br36t36dvk7"
 
 [node name="Label" type="Label" parent="."]
 offset_left = -83.0

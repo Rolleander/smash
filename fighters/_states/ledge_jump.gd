@@ -8,6 +8,7 @@ func enter(previous_state_path: String):
 	pass
 
 func update(_delta: float):
+	super.update(_delta)
 	if frame == 5:
 		fighter.position.y -= jumpSpeed
 		if fighter.grabbingLedge:
