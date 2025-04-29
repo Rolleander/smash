@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://7kqs61vfi3ad"]
+[gd_scene load_steps=69 format=3 uid="uid://7kqs61vfi3ad"]
 
 [ext_resource type="Script" uid="uid://cjtbpjucyo6s4" path="res://fighters/rob/rob.gd" id="1_4uef7"]
 [ext_resource type="Texture2D" uid="uid://4f3nv8q0p483" path="res://fighters/rob/rob_spriteset.png" id="1_yc6ev"]
@@ -32,6 +32,14 @@
 [ext_resource type="Script" uid="uid://ddij2qopeccv4" path="res://fighters/_states/hitstun.gd" id="27_tf6b7"]
 [ext_resource type="Script" uid="uid://cxg1jun1bwwpi" path="res://fighters/_states/tumble.gd" id="28_13lek"]
 [ext_resource type="Script" uid="uid://b3br36t36dvk7" path="res://fighters/_states/air_attack.gd" id="30_5b2vd"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5b2vd"]
+radius = 12.0
+height = 64.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c6kbh"]
+radius = 20.0
+height = 45.0
 
 [sub_resource type="Animation" id="Animation_vp2n1"]
 resource_name = "AIR"
@@ -580,11 +588,42 @@ tracks/1/keys = {
 "values": [1, 0, 2, 3]
 }
 
+[sub_resource type="Animation" id="Animation_5b2vd"]
+resource_name = "CROUCH"
+length = 0.500003
+loop_mode = 1
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"CROUCH"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lldjf"]
 _data = {
 &"AIR": SubResource("Animation_vp2n1"),
 &"ATTACK": SubResource("Animation_k7j77"),
 &"ATTACK_UP": SubResource("Animation_s6tx8"),
+&"CROUCH": SubResource("Animation_5b2vd"),
 &"DASH": SubResource("Animation_7np10"),
 &"HITSTUN": SubResource("Animation_tf6b7"),
 &"IDLE": SubResource("Animation_8gid5"),
@@ -606,6 +645,10 @@ region = Rect2(600, 300, 300, 300)
 [sub_resource type="AtlasTexture" id="AtlasTexture_5b2vd"]
 atlas = ExtResource("1_yc6ev")
 region = Rect2(900, 300, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c6kbh"]
+atlas = ExtResource("1_yc6ev")
+region = Rect2(1800, 300, 300, 300)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k7j77"]
 atlas = ExtResource("1_yc6ev")
@@ -675,6 +718,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"ATTACK_UP",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c6kbh")
+}],
+"loop": true,
+"name": &"CROUCH",
 "speed": 5.0
 }, {
 "frames": [{
@@ -757,7 +808,7 @@ radius = 25.0
 font_size = 12
 font_color = Color(0, 0, 0, 1)
 
-[node name="Rob" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "animations", "collision", "tumbleCollision", "tumbleSmoke", "rcGroundL", "rcGroundR", "rcLedgeGrabF", "rcLedgeGrabB", "stateMachine")]
+[node name="Rob" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "animations", "collision", "hurtBox", "tumbleCollision", "tumbleSmoke", "rcGroundL", "rcGroundR", "rcLedgeGrabF", "rcLedgeGrabB", "stateMachine")]
 collision_mask = 6
 platform_floor_layers = 4294901766
 platform_wall_layers = 2
@@ -765,6 +816,7 @@ script = ExtResource("1_4uef7")
 sprite = NodePath("AnimatedSprite2D")
 animations = NodePath("AnimationPlayer")
 collision = NodePath("Collision")
+hurtBox = NodePath("Hurtbox")
 tumbleCollision = NodePath("TumbleCollision")
 tumbleSmoke = NodePath("TumbleSmoke")
 rcGroundL = NodePath("GroundL")
@@ -773,6 +825,21 @@ rcLedgeGrabF = NodePath("Ledge_Grab_F")
 rcLedgeGrabB = NodePath("Ledge_Grab_B")
 stateMachine = NodePath("StateMachine")
 atts = ExtResource("2_tigya")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 32
+
+[node name="Normal" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CapsuleShape2D_5b2vd")
+debug_color = Color(1, 1, 0, 0.419608)
+
+[node name="Crouch" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, 11)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_c6kbh")
+disabled = true
+debug_color = Color(1, 1, 0, 0.419608)
 
 [node name="TumbleSmoke" parent="." instance=ExtResource("3_s6tx8")]
 

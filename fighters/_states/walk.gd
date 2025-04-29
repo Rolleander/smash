@@ -10,6 +10,9 @@ func update(_delta: float) -> void:
 	
 	if startAttack(true, true):
 		return
+	
+	if CInput.pressed(fighter, CInput.CTRL.DOWN):
+		return next("CROUCH")
 
 	if stick_x > 0:
 		fighter.turn(false)

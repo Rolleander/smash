@@ -18,7 +18,7 @@ func reset():
 	hitstun = 0
 
 func apply(angle: float, box: HitboxAttributes, from: Fighter):
-	var power = _calc_knockback(fighter.percentage, box.damage, fighter.atts.weight, box.knockbackGrowth, box.knockbackBase)
+	var power = _calc_knockback(fighter, box.damage, box.knockbackGrowth, box.knockbackBase)
 	print("power ", power)
 	angle = _calc_angle(angle, box.angleCalc, from)
 	print("angle ", angle)
@@ -49,13 +49,15 @@ func _calc_angle(angle: float, calc: HitboxAttributes.AngleCalc, source: Fighter
 		HitboxAttributes.AngleCalc.PULL_INWARDS:
 			return rad_to_deg((source.global_position - fighter.global_position).angle())
 		
-func _calc_knockback(percentage, damage, weight, knockbackGrowth, knockbackBase):
-	var p = percentage + damage
+func _calc_knockback(fighter : Fighter, damage, knockbackGrowth, knockbackBase):
+	var p = fighter.percentage + damage
 	var d = damage
-	var w = weight
+	var w = fighter.atts.weight
 	var s = knockbackGrowth / 100.0
 	var b = knockbackBase
 	var r = RATIO
+	if fighter.state == "CROUCH":
+		r = 0.65
 	#melee onward formula
 	return (((((p / 10.0) + ((p * d) / 20.0)) * (200.0 / (w + 100.0) * 1.4) + 18.0) * s) + b) * r
 

@@ -4,10 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://d24tcibnkm873" path="res://effects/assets/arrow.png" id="2_rr608"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dxatq"]
-size = Vector2(60, 10)
+size = Vector2(20, 10)
 
 [node name="Hitbox" type="Area2D" node_paths=PackedStringArray("shape", "arrow")]
+visible = false
 collision_layer = 32
+collision_mask = 64
 script = ExtResource("1_ludeq")
 width = 15.0
 height = 15.0

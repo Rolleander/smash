@@ -4,6 +4,7 @@ class_name Fighter extends CharacterBody2D
 @export var animations: AnimationPlayer
 
 @export var collision: CollisionShape2D
+@export var hurtBox: Area2D
 @export var tumbleCollision: CollisionShape2D
 @export var tumbleSmoke: TumbleSmoke
 @export var rcGroundL: RayCast2D
@@ -58,7 +59,7 @@ func direction():
 	return -1
 
 func isLanding() -> bool:
-	return inState(["AIR"]) and (rcGroundL.is_colliding() or rcGroundR.is_colliding())
+	return inState(["AIR"]) and (rcGroundL.is_colliding() or rcGroundR.is_colliding()) and velocity.y >=0
 	
 func isFalling() -> bool:
 	return inState(["STAND", "DASH", "RUN", "WALK"]) and not rcGroundL.is_colliding() and not rcGroundR.is_colliding()

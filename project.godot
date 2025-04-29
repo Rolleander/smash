@@ -127,6 +127,7 @@ veffects_node=""
 2d_physics/layer_4="ledge"
 2d_physics/layer_5="blastzone"
 2d_physics/layer_6="hitbox"
+2d_physics/layer_7="hurtbox"
 
 [rendering]
 

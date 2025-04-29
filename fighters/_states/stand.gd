@@ -37,3 +37,5 @@ func update(_delta: float) -> void:
 		fighter.turn(true)
 		return next("WALK")
 			
+	if CInput.pressed(fighter, CInput.CTRL.DOWN):
+		return next("CROUCH")
