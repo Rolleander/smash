@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://7kqs61vfi3ad"]
+[gd_scene load_steps=76 format=3 uid="uid://7kqs61vfi3ad"]
 
 [ext_resource type="Script" uid="uid://cjtbpjucyo6s4" path="res://fighters/rob/rob.gd" id="1_4uef7"]
 [ext_resource type="Texture2D" uid="uid://4f3nv8q0p483" path="res://fighters/rob/rob_spriteset.png" id="1_yc6ev"]
@@ -32,6 +32,9 @@
 [ext_resource type="Script" uid="uid://ddij2qopeccv4" path="res://fighters/_states/hitstun.gd" id="27_tf6b7"]
 [ext_resource type="Script" uid="uid://cxg1jun1bwwpi" path="res://fighters/_states/tumble.gd" id="28_13lek"]
 [ext_resource type="Script" uid="uid://b3br36t36dvk7" path="res://fighters/_states/air_attack.gd" id="30_5b2vd"]
+[ext_resource type="Script" uid="uid://kyui0tgrdb4c" path="res://fighters/_states/shield.gd" id="31_vg343"]
+[ext_resource type="Script" uid="uid://crg80wl3kth2b" path="res://fighters/_states/roll.gd" id="32_umdtm"]
+[ext_resource type="PackedScene" uid="uid://bdmehky8rvsda" path="res://fighters/_global/shield.tscn" id="33_c6kbh"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5b2vd"]
 radius = 12.0
@@ -618,6 +621,65 @@ tracks/1/keys = {
 "values": [0]
 }
 
+[sub_resource type="Animation" id="Animation_umdtm"]
+resource_name = "SHIELD"
+length = 0.166669
+loop_mode = 1
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"SHIELD"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_npb0f"]
+resource_name = "ROLL"
+length = 0.466669
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"ROLL"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lldjf"]
 _data = {
 &"AIR": SubResource("Animation_vp2n1"),
@@ -630,6 +692,8 @@ _data = {
 &"JUMP": SubResource("Animation_nkdak"),
 &"LEDGE_HOLD": SubResource("Animation_aqnwf"),
 &"RESET": SubResource("Animation_w0mty"),
+&"ROLL": SubResource("Animation_npb0f"),
+&"SHIELD": SubResource("Animation_umdtm"),
 &"TUMBLE": SubResource("Animation_13lek"),
 &"WALK": SubResource("Animation_jn7bj")
 }
@@ -673,6 +737,14 @@ region = Rect2(1800, 300, 300, 300)
 [sub_resource type="AtlasTexture" id="AtlasTexture_7np10"]
 atlas = ExtResource("1_yc6ev")
 region = Rect2(900, 600, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_umdtm"]
+atlas = ExtResource("1_yc6ev")
+region = Rect2(1800, 0, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_npb0f"]
+atlas = ExtResource("1_yc6ev")
+region = Rect2(0, 0, 300, 300)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_13lek"]
 atlas = ExtResource("1_yc6ev")
@@ -773,6 +845,22 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_umdtm")
+}],
+"loop": true,
+"name": &"ROLL",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_npb0f")
+}],
+"loop": true,
+"name": &"SHIELD",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_13lek")
 }],
 "loop": true,
@@ -808,7 +896,7 @@ radius = 25.0
 font_size = 12
 font_color = Color(0, 0, 0, 1)
 
-[node name="Rob" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "animations", "collision", "hurtBox", "tumbleCollision", "tumbleSmoke", "rcGroundL", "rcGroundR", "rcLedgeGrabF", "rcLedgeGrabB", "stateMachine")]
+[node name="Rob" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "animations", "collision", "hurtBox", "tumbleCollision", "tumbleSmoke", "rcGroundL", "rcGroundR", "rcLedgeGrabF", "rcLedgeGrabB", "stateMachine", "shield")]
 collision_mask = 6
 platform_floor_layers = 4294901766
 platform_wall_layers = 2
@@ -824,6 +912,7 @@ rcGroundR = NodePath("GroundR")
 rcLedgeGrabF = NodePath("Ledge_Grab_F")
 rcLedgeGrabB = NodePath("Ledge_Grab_B")
 stateMachine = NodePath("StateMachine")
+shield = NodePath("Shield")
 atts = ExtResource("2_tigya")
 
 [node name="Hurtbox" type="Area2D" parent="."]
@@ -973,6 +1062,14 @@ metadata/_custom_type_script = "uid://cxg1jun1bwwpi"
 script = ExtResource("30_5b2vd")
 metadata/_custom_type_script = "uid://b3br36t36dvk7"
 
+[node name="SHIELD" type="Node" parent="StateMachine"]
+script = ExtResource("31_vg343")
+metadata/_custom_type_script = "uid://kyui0tgrdb4c"
+
+[node name="ROLL" type="Node" parent="StateMachine"]
+script = ExtResource("32_umdtm")
+metadata/_custom_type_script = "uid://crg80wl3kth2b"
+
 [node name="Label" type="Label" parent="."]
 offset_left = -83.0
 offset_top = -47.0
@@ -1007,5 +1104,8 @@ metadata/_custom_type_script = "uid://bxyupbll7v46a"
 [node name="R1" parent="HitboxPool" index="0"]
 width = 20.0
 height = 10.0
+
+[node name="Shield" parent="." instance=ExtResource("33_c6kbh")]
+visible = false
 
 [editable path="HitboxPool"]

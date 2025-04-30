@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://bdmehky8rvsda"]
+
+[ext_resource type="Shader" uid="uid://hn8eld2d0uqy" path="res://shaders/voronoi.gdshader" id="1_ojx4i"]
+[ext_resource type="Script" uid="uid://cc1yyqyqxpjx2" path="res://fighters/_global/shield.gd" id="1_ujk5w"]
+[ext_resource type="Texture2D" uid="uid://bggx0cmwd5v5r" path="res://effects/assets/common/ptc_cmn_syabon.png" id="2_ujk5w"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ujk5w"]
+shader = ExtResource("1_ojx4i")
+shader_parameter/kelvin = 1209.13
+shader_parameter/red_colour = 9.3
+shader_parameter/green_colour = 11.7
+shader_parameter/blue_colour = 24.0
+shader_parameter/time_factor = 1.38
+shader_parameter/move = false
+shader_parameter/resolution = 0.15
+shader_parameter/sin_roll = 0.27
+shader_parameter/cos_roll = 0.41
+shader_parameter/alpha = 0.7
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ojx4i"]
+blend_mode = 1
+
+[node name="Shield" type="Node2D"]
+script = ExtResource("1_ujk5w")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_ujk5w")
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 33.0
+offset_bottom = 33.0
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+z_as_relative = false
+material = SubResource("ShaderMaterial_ujk5w")
+offset_left = -30.0
+offset_top = -29.0
+offset_right = 28.0
+offset_bottom = 29.0
+
+[node name="PtcCmnSyabon" type="Sprite2D" parent="."]
+modulate = Color(0.309804, 0.584314, 1, 0.760784)
+z_index = 3
+z_as_relative = false
+material = SubResource("CanvasItemMaterial_ojx4i")
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("2_ujk5w")

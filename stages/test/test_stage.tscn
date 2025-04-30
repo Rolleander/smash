@@ -208,14 +208,16 @@ libraries = {
 }
 autoplay = "move"
 
-[node name="fighters" type="Node" parent="." groups=["fighters_node"]]
+[node name="fighters" type="Node2D" parent="." groups=["fighters_node"]]
+z_index = 1
 
 [node name="Rob" parent="fighters" instance=ExtResource("3_dv6hh")]
 position = Vector2(-3, 170)
 
 [node name="Rob2" parent="fighters" instance=ExtResource("3_dv6hh")]
 
-[node name="veffects" type="Node" parent="." groups=["veffects_node"]]
+[node name="veffects" type="Node2D" parent="." groups=["veffects_node"]]
+z_index = 5
 
 [node name="foreground" type="Node2D" parent="."]
 z_index = 10

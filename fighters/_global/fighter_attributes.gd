@@ -14,7 +14,8 @@ class_name FighterAttributes extends Resource
 @export var fallSpeed = 900
 @export var maxFallSpeed = 900
 @export var traction = 40
-@export var rollDistance = 350
+@export var rollSpeed = 450
+@export var rollFrames = 20
 @export var airDodgeSpeed = 500
 @export var landingFrames = 0
 @export var jumpSquatFrames = 3

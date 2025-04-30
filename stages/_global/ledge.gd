@@ -33,7 +33,7 @@ func _physics_process(delta: float) -> void:
 	if _checkFrames == 5:
 		_checkFrames = 0
 		for fighter in StageUtils.getFighters():
-			if !fighter.alive || fighter.inState(["LANDING", "STAND"]) || fighter.isWalking():
+			if !fighter.alive || fighter.inState(["LANDING", "STAND"]) || fighter.isGrounded():
 				_farFighters.erase(fighter)
 			if !_farFighters.has(fighter) && _is_fighter_far(fighter):
 				_farFighters.append(fighter)

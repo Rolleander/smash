@@ -35,8 +35,6 @@ func apply(angle: float, box: HitboxAttributes, from: Fighter):
 		fighter.stateMachine._transition_to_next_state("TUMBLE")
 	else:
 		fighter.stateMachine._transition_to_next_state("HITSTUN")
-	fighter.freeze.applyToTarget(box)
-	from.freeze.applyToSource(box)
 	return angle
 	
 

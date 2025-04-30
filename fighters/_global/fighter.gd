@@ -12,6 +12,7 @@ class_name Fighter extends CharacterBody2D
 @export var rcLedgeGrabF: LedgeScan
 @export var rcLedgeGrabB: LedgeScan
 @export var stateMachine: StateMachine
+@export var shield: Shield
 
 @export var atts: FighterAttributes
 
@@ -27,6 +28,7 @@ var dropFromY = 0
 var facingRight = true
 var percentage = 0
 var stocks = 3
+var invincible = false
 var knockback = FighterKnockback.new(self)
 var freeze = FreezFrames.new(self)
 
@@ -49,6 +51,9 @@ func turn(left: bool):
 	rcLedgeGrabF.turn(left)
 	rcLedgeGrabB.turn(left)
 
+func intangible(on: bool):
+	hurtBox.monitoring = !on
+
 func kill():
 	alive = false
 	stateMachine.force_state("KO")
@@ -61,11 +66,11 @@ func direction():
 func isLanding() -> bool:
 	return inState(["AIR"]) and (rcGroundL.is_colliding() or rcGroundR.is_colliding()) and velocity.y >=0
 	
-func isFalling() -> bool:
-	return inState(["STAND", "DASH", "RUN", "WALK"]) and not rcGroundL.is_colliding() and not rcGroundR.is_colliding()
+func isStartingToFall() -> bool:
+	return inState(["STAND", "DASH", "RUN", "WALK", "TURN", "BRAKE","SHIELD","ROLL"]) and not rcGroundL.is_colliding() and not rcGroundR.is_colliding()
 
-func isWalking() -> bool:
-	return inState(["RUN", "WALK", "DASH", "TURN", "BRAKE", "ATTACK"])
+func isGrounded() -> bool:
+	return inState(["RUN", "WALK", "DASH", "TURN", "BRAKE", "ATTACK","SHIELD","CROUCH","ROLL"])
 
 func shouldGrabLedge():
 	if !inState(["AIR"]):

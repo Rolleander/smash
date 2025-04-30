@@ -25,9 +25,9 @@ func _physics_process(delta: float) -> void:
 		return
 	if fighter.isLanding():
 		_transition_to_next_state("LANDING")
-	elif fighter.isFalling():
+	elif fighter.isStartingToFall():
 		_transition_to_next_state("AIR")
-	elif fighter.isWalking():
+	elif fighter.isGrounded():
 		fighter.applySlopeVerticalSpeed()
 	else:
 		var ledge = fighter.shouldGrabLedge()

@@ -4,6 +4,7 @@ func enter(previous_state_path: String):
 	fighter.alive = false
 	fighter.sprite.visible = false
 	fighter.velocity = Vector2(0, 0)
+	fighter.intangible(true)
 
 func update(_delta: float):
 	super.update(_delta)

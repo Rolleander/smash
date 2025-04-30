@@ -30,8 +30,12 @@ func _hit(body: Node2D):
 		_fighter_hit(fighter)
 
 func _fighter_hit(fighter: Fighter):
+	source.freeze.applyToSource(atts)
+	if fighter.invincible:
+		return
 	fighter.percentage += atts.damage
 	var angle = fighter.knockback.apply(angle, atts, source)
+	fighter.freeze.applyToTarget(atts)
 	var effect = angleEffect.instantiate()
 	var hitboxPos = get_child(0).global_position
 	effect.global_position = fighter.global_position.lerp(hitboxPos, 0.5)

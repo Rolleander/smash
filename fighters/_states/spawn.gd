@@ -10,11 +10,15 @@ func enter(previous_state_path: String):
 	fighter.rotation = 0
 	fighter.global_position = Vector2(0, 0)
 	fighter.tumbleSmoke.stop()
+	fighter.shield.visible = false
+	fighter.invincible = false
+	fighter.intangible(true)
 
 
 func update(_delta: float):
 	super.update(_delta)
 	if frame == 60:
 		next("AIR")
+		fighter.intangible(false)
 		fighter.collision.set_deferred("disabled", false)
 		fighter.tumbleCollision.set_deferred("disabled", true)
