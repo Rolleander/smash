@@ -18,7 +18,7 @@ func update(_delta: float) -> void:
 		fighter.fastFall = true
 		Sounds.play(fastFallSound, fighter.global_position, -2, 2)
 		
-	air_movement(!attack && flickScanDone)
+	air_movement(!moveBuffering && flickScanDone)
 	check_platforms()
 	
 	if CInput.justPressed(fighter, CInput.CTRL.JUMP) and fighter.airJumps < fighter.atts.airJumps:

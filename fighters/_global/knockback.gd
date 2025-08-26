@@ -10,7 +10,7 @@ const RATIO = 1.0
 const LAUNCH_V = 30
 const DECAY = 0.051
 
-func _init(fighter : Fighter) -> void:
+func _init(fighter: Fighter) -> void:
 	self.fighter = fighter
 	
 func reset():
@@ -31,6 +31,8 @@ func apply(angle: float, box: HitboxAttributes, from: Fighter):
 	hitstun = _calc_hitstun(power)
 	print("hitstun ", hitstun)
 	knockback = power
+	if knockback >= 1 and fighter.airJumps == fighter.atts.airJumps:
+		fighter.airJumps -= 1
 	if power >= 20:
 		fighter.stateMachine._transition_to_next_state("TUMBLE")
 	else:
@@ -47,7 +49,7 @@ func _calc_angle(angle: float, calc: HitboxAttributes.AngleCalc, source: Fighter
 		HitboxAttributes.AngleCalc.PULL_INWARDS:
 			return rad_to_deg((source.global_position - fighter.global_position).angle())
 		
-func _calc_knockback(fighter : Fighter, damage, knockbackGrowth, knockbackBase):
+func _calc_knockback(fighter: Fighter, damage, knockbackGrowth, knockbackBase):
 	var p = fighter.percentage + damage
 	var d = damage
 	var w = fighter.atts.weight

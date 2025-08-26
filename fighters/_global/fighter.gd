@@ -17,7 +17,7 @@ class_name Fighter extends CharacterBody2D
 @export var atts: FighterAttributes
 
 var state: String
-var action : int
+var move: Enums.MOVES = Enums.MOVES.NONE
 var lagFrames = 0
 var fastFall = false
 var airJumps = 0
@@ -64,13 +64,13 @@ func direction():
 	return -1
 
 func isLanding() -> bool:
-	return inState(["AIR"]) and (rcGroundL.is_colliding() or rcGroundR.is_colliding()) and velocity.y >=0
+	return inState(["AIR"]) and (rcGroundL.is_colliding() or rcGroundR.is_colliding()) and velocity.y >= 0
 	
 func isStartingToFall() -> bool:
-	return inState(["STAND", "DASH", "RUN", "WALK", "TURN", "BRAKE","SHIELD","ROLL"]) and not rcGroundL.is_colliding() and not rcGroundR.is_colliding()
+	return inState(["STAND", "DASH", "RUN", "WALK", "TURN", "BRAKE", "SHIELD", "ROLL"]) and not rcGroundL.is_colliding() and not rcGroundR.is_colliding()
 
 func isGrounded() -> bool:
-	return inState(["RUN", "WALK", "DASH", "TURN", "BRAKE", "ATTACK","SHIELD","CROUCH","ROLL"])
+	return inState(["RUN", "WALK", "DASH", "TURN", "BRAKE", "ATTACK", "SHIELD", "CROUCH", "ROLL"])
 
 func shouldGrabLedge():
 	if !inState(["AIR"]):
