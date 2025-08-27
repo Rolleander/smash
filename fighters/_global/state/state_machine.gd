@@ -57,6 +57,9 @@ func force_state(state: String):
 	next_state = get_node(state)
 	_force_set = true
 
+func next(state: String):
+	_transition_to_next_state(state)
+
 func _transition_to_next_state(target_state_path: String) -> void:
 	if _force_set:
 		return

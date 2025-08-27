@@ -31,3 +31,4 @@ func enter(previous_state_path: String):
 	Sounds.play(sound, fighter.global_position, -8 + dropDistance * 0.025, 1.3)
 	dust.intensity = 0.6 + dropDistance * 0.003
 	fighter.veffect(dust, Vector2(0, 40))
+	fighter.on_landing.emit()

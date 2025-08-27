@@ -13,7 +13,7 @@ func enter(previous_state_path: String):
 	fighter.shield.visible = false
 	fighter.invincible = false
 	fighter.intangible(true)
-
+	fighter.on_spawn.emit()
 
 func update(_delta: float):
 	super.update(_delta)

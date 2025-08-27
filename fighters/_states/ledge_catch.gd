@@ -3,6 +3,7 @@ class_name LEDGE_CATCH extends State
 func enter(previous_state_path: String):
 	fighter.animation("LEDGE_HOLD", true)
 	fighter.fastFall = false
+	fighter.on_ledge_catch.emit()
 
 func update(_delta: float):
 	super.update(_delta)

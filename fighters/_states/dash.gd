@@ -45,8 +45,8 @@ func update(_delta: float) -> void:
 		return next("SHIELD")
 		
 	if CInput.justPressed(fighter, CInput.CTRL.ATTACK):
-		fighter.move = Enums.MOVES.DASH
-		return next("ATTACK")
+		fighter.moves.do_move(Moves.TYPE.DASH)
+		return
 
 	if frame >= fighter.atts.dashFrames - 1:
 		return next("RUN")

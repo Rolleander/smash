@@ -8,9 +8,7 @@ func startAttack(allowTilt = true, allowSmash = true):
 			fighter.turn(false)
 		elif stick_x <= TURN_LIMIT * -1:
 			fighter.turn(true)
-		fighter.move = attack
-		fighter.flickScan.consumeMove()
-		next("ATTACK")
+		fighter.moves.do_move(attack)
 		return true
 	return false
 
@@ -23,24 +21,24 @@ func _queryAttacks(allowTilt = true, allowSmash = true):
 			var yStronger = abs(stick_y) >= abs(stick_x)
 			var tilt = stick_y if yStronger else stick_x
 			if tilt >= TILT_LIMIT:
-				return Enums.MOVES.D_SPECIAL if yStronger else Enums.MOVES.F_SPECIAL
+				return Moves.TYPE.D_SPECIAL if yStronger else Moves.TYPE.F_SPECIAL
 			elif tilt <= TILT_LIMIT * -1:
-				return Enums.MOVES.U_SPECIAL if yStronger else Enums.MOVES.F_SPECIAL
-		return Enums.MOVES.SPECIAL
+				return Moves.TYPE.U_SPECIAL if yStronger else Moves.TYPE.F_SPECIAL
+		return Moves.TYPE.SPECIAL
 	if flick == FlickScan.DIR.UP:
-		return Enums.MOVES.U_SMASH
+		return Moves.TYPE.U_SMASH
 	elif flick == FlickScan.DIR.DOWN:
-		return Enums.MOVES.D_SMASH
+		return Moves.TYPE.D_SMASH
 	elif flick == FlickScan.DIR.LEFT:
-		return Enums.MOVES.F_SMASH
+		return Moves.TYPE.F_SMASH
 	elif flick == FlickScan.DIR.RIGHT:
-		return Enums.MOVES.F_SMASH
+		return Moves.TYPE.F_SMASH
 	elif noFlick:
 		if max(abs(stick_x), abs(stick_y)) >= TILT_LIMIT:
 			var yStronger = abs(stick_y) >= abs(stick_x)
 			var tilt = stick_y if yStronger else stick_x
 			if tilt >= TILT_LIMIT:
-				return Enums.MOVES.D_TILT if yStronger else Enums.MOVES.F_TILT
+				return Moves.TYPE.D_TILT if yStronger else Moves.TYPE.F_TILT
 			elif tilt <= TILT_LIMIT * -1:
-				return Enums.MOVES.U_TILT if yStronger else Enums.MOVES.F_TILT
-		return Enums.MOVES.NORMAL
+				return Moves.TYPE.U_TILT if yStronger else Moves.TYPE.F_TILT
+		return Moves.TYPE.NORMAL

@@ -17,7 +17,6 @@ class_name Fighter extends CharacterBody2D
 @export var atts: FighterAttributes
 
 var state: String
-var move: Enums.MOVES = Enums.MOVES.NONE
 var lagFrames = 0
 var fastFall = false
 var airJumps = 0
@@ -31,11 +30,14 @@ var stocks = 3
 var invincible = false
 var knockback = FighterKnockback.new(self)
 var freeze = FreezFrames.new(self)
-
+var moves = MoveHandler.new(self)
 var grabbingLedge: Ledge = null
 var regrabPause = 0
 
 var flickScan = FlickScan.new(self, 3)
+
+func _ready() -> void:
+	moves.ready()
 
 func _physics_process(delta: float) -> void:
 	# make sure the ground raycasts always point downwards, even if character is rotated
@@ -160,3 +162,7 @@ func applySlopeVerticalSpeed():
 	#check for downwards slope normal
 	if (facingRight && slope_direction.y < 0) || (!facingRight && slope_direction.y > 0):
 		velocity.y = max(15, abs(velocity.x) * abs(slope_direction.y) * 2)
+
+signal on_landing()
+signal on_ledge_catch()
+signal on_spawn()

@@ -1,13 +1,12 @@
 class_name AIR_ATTACK extends AirbornState
 
+var _move: FighterMove
+
 func enter(previous_state_path: String):
-	var type = Enums.MOVES.keys()[fighter.move]
-	print("action => ", type)
-	fighter.animation("ATTACK", true)
-	
+	_move = fighter.moves.pop_move()
 
 func update(_delta: float) -> void:
 	super.update(_delta)
 	air_movement(false, 0)
-	if !fighter.animations.is_playing():
+	if !_move.running:
 		next("AIR")

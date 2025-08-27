@@ -17,8 +17,8 @@ func update(_delta: float) -> void:
 		fighter.veffect(dust.instantiate(), Vector2(fighter.velocity.x * -0.03 + randf_range(-10, 10)
 			+ (-10 if fighter.facingRight else 10), 35))
 	if CInput.justPressed(fighter, CInput.CTRL.ATTACK):
-		fighter.move = Enums.MOVES.DASH
-		return next("ATTACK")
+		fighter.moves.do_move(Moves.TYPE.DASH)
+		return
 	if CInput.justPressed(fighter, CInput.CTRL.JUMP):
 		return next("JUMP_SQUAT")
 	if CInput.pressed(fighter, CInput.CTRL.SHIELD):

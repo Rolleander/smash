@@ -3,9 +3,7 @@ class_name AirbornState extends State
 func startAttack():
 	var attack = _queryAttacks()
 	if attack != null:
-		fighter.flickScan.consumeMove()
-		fighter.move = attack
-		next("AIR_ATTACK")
+		fighter.moves.do_move(attack)
 		return true
 	return false
 
@@ -19,21 +17,21 @@ func _queryAttacks():
 		if yStronger:
 			if tilt >= TILT_LIMIT:
 				if special:
-					return Enums.MOVES.D_SPECIAL
-				return Enums.MOVES.D_AIR
+					return Moves.TYPE.D_SPECIAL
+				return Moves.TYPE.D_AIR
 			elif tilt <= TILT_LIMIT * -1:
 				if special:
-					return Enums.MOVES.U_SPECIAL
-				return Enums.MOVES.U_AIR
+					return Moves.TYPE.U_SPECIAL
+				return Moves.TYPE.U_AIR
 		else:
 			if special:
-				return Enums.MOVES.F_SPECIAL
+				return Moves.TYPE.F_SPECIAL
 			if (fighter.facingRight and stick_x >= 0) or (!fighter.facingRight and stick_x <= 0):
-				return Enums.MOVES.F_AIR
-			return Enums.MOVES.B_AIR
+				return Moves.TYPE.F_AIR
+			return Moves.TYPE.B_AIR
 	if special:
-		return Enums.MOVES.SPECIAL
-	return Enums.MOVES.NORMAL_AIR
+		return Moves.TYPE.SPECIAL
+	return Moves.TYPE.NORMAL_AIR
 
 func air_movement(allowTurning = true, steerFactor = 1.0, fallFactor = 1.0):
 	if fighter.velocity.y < 0:
