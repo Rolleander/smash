@@ -8,5 +8,5 @@ func enter(previous_state_path: String):
 func update(_delta: float) -> void:
 	super.update(_delta)
 	air_movement(false, 0)
-	if !_move.running:
+	if !_move.update_move(_delta):
 		next("AIR")

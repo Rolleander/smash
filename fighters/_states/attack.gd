@@ -16,5 +16,5 @@ func update(_delta: float) -> void:
 	if not fighter.rcGroundL.is_colliding() and not fighter.rcGroundR.is_colliding():
 		air_movement(false, 0, 0.5)
 		
-	if !_move.running:
+	if !_move.update_move(_delta):
 		next("STAND")

@@ -25,13 +25,13 @@ func do_move(move: Moves.TYPE) -> void:
 	if not fighter_move:
 		printerr("no move registerd for ", Moves.TYPE.keys()[move])
 		return
-	if fighter_move.forbidden():
+	if !fighter_move.allowed:
 		return
 	self._next_move = move
-	if Moves.FLAGS[move]["air"]:
-		fighter.stateMachine.next("AIR_ATTACK")
-	else:
+	if fighter.isGrounded():
 		fighter.stateMachine.next("ATTACK")
+	else:
+		fighter.stateMachine.next("AIR_ATTACK")
 
 func pop_move() -> FighterMove:
 	var move = _next_move

@@ -1,5 +1,5 @@
 class_name FighterMove
-extends Node
+extends Node2D
 
 @export var type = Moves.TYPE.NONE
 @export var chargeable = false
@@ -15,10 +15,14 @@ var _charge_frames = 0
 var _special = false
 var _charged_powerup = 1
 var running = false
+var _move_frame = 0
+var allowed = true
+var auto_complete = true
 
 func _ready() -> void:
 	_special = Moves.FLAGS[type]["special"] as bool
 	animation = Moves.TYPE.keys()[type]
+	visible = false
 
 signal on_start()
 
@@ -31,26 +35,32 @@ func start():
 		fighter.animation(charge_anim, true)
 	else:
 		fighter.animation(animation, true)
+		visible = true
+	_move_frame = 0
 	_charging = chargeable
 
 func completed():
 	running = false
 	pass
 
-func forbidden():
-	return false
+func _update(frame: int):
+	pass
 
-func _physics_process(_delta: float) -> void:
+func update_move(_delta: float) -> bool:
 	if _charging:
 		if (_special and !CInput.pressed(fighter, CInput.CTRL.SPECIAL)) or (!_special and !CInput.pressed(fighter, CInput.CTRL.ATTACK)):
 			_release_charge()
 		_charge_frames += 1
-	else:
-		if running and !fighter.animations.is_playing():
+	elif running:
+		if auto_complete && !fighter.animations.is_playing():
 			completed()
+		_update(_move_frame)
+		_move_frame += 1
+	return running
 
 func _release_charge():
 	var charge_fraction = clamp(_charge_frames * 1.0 / charge_length, 0, 1)
 	_charged_powerup = lerp(1.0, charge_powerup, charge_fraction)
 	fighter.animation(animation, true)
 	_charging = false
+	visible = true

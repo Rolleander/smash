@@ -30,3 +30,10 @@ func justPressed(fighter: Fighter, ctrl: String):
 
 func axis(fighter: Fighter, axis: Array):
 	return Input.get_axis(str(fighter.controllerId) + "_" + axis[0], str(fighter.controllerId) + "_" + axis[1])
+
+func angle(fighter: Fighter):
+	var x = axis(fighter, AXIS.X)
+	var y = axis(fighter, AXIS.Y)
+	if x == 0 and y == 0:
+		return null
+	return atan2(y, x)

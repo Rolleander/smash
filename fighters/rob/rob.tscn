@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=3 uid="uid://7kqs61vfi3ad"]
+[gd_scene load_steps=80 format=3 uid="uid://7kqs61vfi3ad"]
 
 [ext_resource type="Script" uid="uid://cjtbpjucyo6s4" path="res://fighters/rob/rob.gd" id="1_4uef7"]
 [ext_resource type="Texture2D" uid="uid://4f3nv8q0p483" path="res://fighters/rob/rob_spriteset.png" id="1_yc6ev"]
@@ -35,7 +35,8 @@
 [ext_resource type="Script" uid="uid://kyui0tgrdb4c" path="res://fighters/_states/shield.gd" id="31_vg343"]
 [ext_resource type="Script" uid="uid://crg80wl3kth2b" path="res://fighters/_states/roll.gd" id="32_umdtm"]
 [ext_resource type="PackedScene" uid="uid://bdmehky8rvsda" path="res://fighters/_global/shield.tscn" id="33_c6kbh"]
-[ext_resource type="Script" uid="uid://cbonhe3bgev33" path="res://fighters/_global/fighter_move.gd" id="36_npb0f"]
+[ext_resource type="Script" uid="uid://nmoqqgvgt2ro" path="res://fighters/rob/normal.gd" id="36_55moa"]
+[ext_resource type="Script" uid="uid://drc33js7mf5rx" path="res://fighters/rob/u_special.gd" id="37_n0h8o"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5b2vd"]
 radius = 12.0
@@ -681,6 +682,35 @@ tracks/7/keys = {
 "values": [0]
 }
 
+[sub_resource type="Animation" id="Animation_55moa"]
+resource_name = "U_SPECIAL"
+length = 0.66667
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"JUMP"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lldjf"]
 _data = {
 &"AIR": SubResource("Animation_vp2n1"),
@@ -696,6 +726,7 @@ _data = {
 &"ROLL": SubResource("Animation_npb0f"),
 &"SHIELD": SubResource("Animation_umdtm"),
 &"TUMBLE": SubResource("Animation_13lek"),
+&"U_SPECIAL": SubResource("Animation_55moa"),
 &"WALK": SubResource("Animation_jn7bj")
 }
 
@@ -896,6 +927,9 @@ radius = 25.0
 [sub_resource type="LabelSettings" id="LabelSettings_nkdak"]
 font_size = 12
 font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_55moa"]
+radius = 5.0
 
 [node name="Rob" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "animations", "collision", "hurtBox", "tumbleCollision", "tumbleSmoke", "rcGroundL", "rcGroundR", "rcLedgeGrabF", "rcLedgeGrabB", "stateMachine", "shield")]
 collision_mask = 6
@@ -1110,10 +1144,30 @@ height = 10.0
 [node name="Shield" parent="." instance=ExtResource("33_c6kbh")]
 visible = false
 
-[node name="MOVES" type="Node" parent="."]
+[node name="MOVES" type="Node2D" parent="."]
 
-[node name="normal" type="Node" parent="MOVES"]
-script = ExtResource("36_npb0f")
+[node name="normal" type="Node2D" parent="MOVES"]
+script = ExtResource("36_55moa")
 type = 1
+
+[node name="u_special" type="Node2D" parent="MOVES"]
+script = ExtResource("37_n0h8o")
+type = 16
+
+[node name="Chain" type="Line2D" parent="MOVES/u_special"]
+top_level = true
+points = PackedVector2Array(0, 0, 0, 0)
+width = 2.0
+default_color = Color(0.0943044, 0.0943044, 0.0943044, 1)
+
+[node name="Hook" type="Area2D" parent="MOVES/u_special"]
+top_level = true
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MOVES/u_special/Hook"]
+shape = SubResource("CircleShape2D_55moa")
+
+[connection signal="body_entered" from="MOVES/u_special/Hook" to="MOVES/u_special" method="_on_hook_body_entered"]
 
 [editable path="HitboxPool"]
