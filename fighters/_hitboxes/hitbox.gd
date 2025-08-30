@@ -1,8 +1,8 @@
 class_name Hitbox extends Area2D
 
-var atts: HitboxAttributes
-var angle = 0
-var source: Fighter
+@export var atts: HitboxAttributes
+@export var angle = 0
+@export var source: Fighter
 var frame = 0
 var hitList = []
 var sourceState: String
@@ -41,7 +41,5 @@ func _fighter_hit(fighter: Fighter):
 	effect.global_position = fighter.global_position.lerp(hitboxPos, 0.5)
 	effect.rotation = deg_to_rad(angle - 90)
 	var scale = clamp(fighter.knockback.knockback * 0.01, 0.5, 1)
-	effect.scale = Vector2(scale, scale) 
+	effect.scale = Vector2(scale, scale)
 	get_tree().get_first_node_in_group("veffects_node").add_child(effect)
-	
-	

@@ -216,6 +216,8 @@ position = Vector2(-3, 170)
 
 [node name="Rob2" parent="fighters" instance=ExtResource("3_dv6hh")]
 
+[node name="hitboxes" type="Node2D" parent="." groups=["hitboxes_node"]]
+
 [node name="veffects" type="Node2D" parent="." groups=["veffects_node"]]
 z_index = 5
 

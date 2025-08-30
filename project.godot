@@ -23,6 +23,7 @@ Events="*res://global/events.gd"
 Sounds="*res://sounds/sounds.gd"
 Collision="*res://fighters/_global/collision.gd"
 MoveUtils="*res://fighters/_global/move_utils.gd"
+FighterUtils="*res://fighters/_global/fighter_utils.gd"
 
 [display]
 
@@ -37,6 +38,7 @@ project/assembly_name="smash"
 
 fighters_node=""
 veffects_node=""
+hitboxes_node=""
 
 [input]
 

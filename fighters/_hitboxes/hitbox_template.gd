@@ -27,7 +27,7 @@ func _ready() -> void:
 		visible = false
 
 func spawn():
-	var source = owner.owner as Fighter
+	var source = FighterUtils.parent_fighter(self)
 	var hitbox = Hitbox.new(source, atts, angle)
 	var hShape = shape.duplicate()
 	hitbox.add_child(hShape)
@@ -36,8 +36,14 @@ func spawn():
 	else:
 		hitbox.angle = 180 - angle
 		hShape.position = Vector2(-position.x, position.y)
-
-	source.add_child(hitbox)
+	print("spawn  ", atts.posRef)
+	if atts.posRef == HitboxAttributes.PosRef.STAGE:
+		#doenst work yet somehow
+		get_tree().get_first_node_in_group("hitboxes_node").add_child(hitbox)
+	elif atts.posRef == HitboxAttributes.PosRef.PLAYER:
+		source.add_child(hitbox)
+	elif atts.posRef == HitboxAttributes.PosRef.LOCAL:
+		get_parent().add_child(hitbox)
 	spawned = hitbox
 
 func despawn():

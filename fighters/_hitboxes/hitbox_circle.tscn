@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://ecmnps8tewaq"]
+
+[ext_resource type="Script" uid="uid://cy2v5gaw32bgl" path="res://fighters/_hitboxes/hitbox_template_circle.gd" id="1_gyyuq"]
+[ext_resource type="Texture2D" uid="uid://d24tcibnkm873" path="res://effects/assets/arrow.png" id="2_23bhm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gyyuq"]
+radius = 5.0
+
+[node name="Hitbox" type="Area2D" node_paths=PackedStringArray("shape", "arrow")]
+visible = false
+collision_layer = 32
+collision_mask = 64
+script = ExtResource("1_gyyuq")
+shape = NodePath("CollisionShape2D")
+arrow = NodePath("Arrow")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_gyyuq")
+debug_color = Color(0.948738, 0, 0.194852, 0.42)
+
+[node name="Arrow" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_23bhm")
+offset = Vector2(25, 0)

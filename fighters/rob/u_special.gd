@@ -2,12 +2,14 @@ extends FighterMove
 
 @onready var chain = $Chain
 @onready var hook = $Hook
+@onready var hook_hitbox = $Hook/Hitbox
 
 var angle = 0
 const hook_shot_speed = 16
 const hook_pull_speed = 14
 var hook_hit = false
 var hook_miss = false
+var pull_end_frame = 0
 
 func _ready() -> void:
 	super ()
@@ -16,10 +18,12 @@ func _ready() -> void:
 	hook.visible = false
 	chain.visible = false
 	hook.monitoring = false
+	
 
 func start():
 	hook_hit = false
 	hook_miss = false
+	hook_hitbox.active = false
 	super ()
 
 func completed():
@@ -27,6 +31,7 @@ func completed():
 	hook.visible = false
 	chain.visible = false
 	hook.monitoring = false
+	hook_hitbox.active = false
 
 func _update(frame: int):
 	fighter.velocity.y = 0
@@ -37,12 +42,7 @@ func _update(frame: int):
 			running = false
 			allowed = true
 			return
-		hook.global_position.x = fighter.global_position.x
-		hook.global_position.y = fighter.global_position.y
-		hook.visible = true
-		chain.visible = true
-		allowed = true
-		hook.monitoring = true
+		_spwan_hook()
 	if hook_hit || hook_miss:
 		_pull()
 	elif frame > 25:
@@ -55,14 +55,23 @@ func _update(frame: int):
 	chain.points[0].y = fighter.global_position.y
 	chain.points[1].x = hook.global_position.x
 	chain.points[1].y = hook.global_position.y
-	
+
+func _spwan_hook():
+	hook_hitbox.active = true
+	hook.global_position.x = fighter.global_position.x
+	hook.global_position.y = fighter.global_position.y
+	hook.visible = true
+	chain.visible = true
+	allowed = true
+	hook.monitoring = true
+
 func _shoot():
 	hook.global_position.x += cos(angle) * hook_shot_speed
 	hook.global_position.y += sin(angle) * hook_shot_speed
 
 func _pull():
 	fighter.global_position = fighter.global_position.move_toward(hook.global_position, hook_pull_speed)
-	if fighter.global_position.distance_to(hook.global_position) <= 25:
+	if fighter.global_position.distance_to(hook.global_position) <= 5 || _move_frame > pull_end_frame:
 		completed()
 		return
 
@@ -71,3 +80,5 @@ func _on_hook_body_entered(_body: Node2D) -> void:
 	if _body != fighter:
 		hook_hit = true
 		hook.monitoring = false
+		var dist = fighter.global_position.distance_to(hook.global_position)
+		pull_end_frame = _move_frame + ceilf(dist / hook_pull_speed)
