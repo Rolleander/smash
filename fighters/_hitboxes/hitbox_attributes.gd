@@ -25,3 +25,4 @@ enum PosRef {
 @export var angleCalc = AngleCalc.SET
 @export var detached = false
 @export var posRef = PosRef.PLAYER
+@export var ignoreShield = false

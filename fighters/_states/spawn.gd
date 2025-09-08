@@ -12,6 +12,7 @@ func enter(previous_state_path: String):
 	fighter.tumbleSmoke.stop()
 	fighter.shield.visible = false
 	fighter.invincible = false
+	fighter.shield.activate(false)
 	fighter.intangible(true)
 	fighter.on_spawn.emit()
 

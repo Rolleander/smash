@@ -87,6 +87,7 @@ type = 0
 angleCalc = 0
 detached = false
 posRef = 0
+ignoreShield = false
 metadata/_custom_type_script = "uid://c1lifl0lw2ftt"
 
 [sub_resource type="Animation" id="Animation_s6tx8"]
@@ -365,6 +366,7 @@ type = 0
 angleCalc = 0
 detached = false
 posRef = 0
+ignoreShield = false
 metadata/_custom_type_script = "uid://c1lifl0lw2ftt"
 
 [sub_resource type="Animation" id="Animation_k7j77"]
@@ -944,6 +946,7 @@ type = 0
 angleCalc = 0
 detached = false
 posRef = 2
+ignoreShield = false
 metadata/_custom_type_script = "uid://c1lifl0lw2ftt"
 
 [node name="Rob" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "animations", "collision", "hurtBox", "tumbleCollision", "tumbleSmoke", "rcGroundL", "rcGroundR", "rcLedgeGrabF", "rcLedgeGrabB", "stateMachine", "shield")]
@@ -1156,8 +1159,9 @@ metadata/_custom_type_script = "uid://bxyupbll7v46a"
 width = 20.0
 height = 10.0
 
-[node name="Shield" parent="." instance=ExtResource("33_c6kbh")]
+[node name="Shield" parent="." node_paths=PackedStringArray("fighter") instance=ExtResource("33_c6kbh")]
 visible = false
+fighter = NodePath("..")
 
 [node name="MOVES" type="Node2D" parent="."]
 

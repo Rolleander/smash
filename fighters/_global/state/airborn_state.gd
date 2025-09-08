@@ -1,5 +1,7 @@
 class_name AirbornState extends State
 
+var DoubleJumpVF = preload("res://effects/double_jump.tscn")
+
 func startAttack():
 	var attack = _queryAttacks()
 	if attack != null:
@@ -54,3 +56,14 @@ func _air_steering(allowTurning = true, factor = 1.0):
 			fighter.turn(false)
 		return true
 	return false
+
+func air_jump():
+	fighter.airJumps += 1
+	fighter.fastFall = false
+	fighter.velocity.x = 0
+	fighter.velocity.y = - fighter.atts.doubleJumpForce
+	fighter.veffect(DoubleJumpVF.instantiate(), Vector2(0, -30))
+	if CInput.pressed(fighter, CInput.CTRL.LEFT):
+		fighter.velocity.x = - fighter.atts.maxAirSpeed
+	if CInput.pressed(fighter, CInput.CTRL.RIGHT):
+		fighter.velocity.x = fighter.atts.maxAirSpeed

@@ -33,6 +33,13 @@ func _fighter_hit(fighter: Fighter):
 	source.freeze.applyToSource(atts)
 	if fighter.invincible:
 		return
+	if fighter.shield.active && !atts.ignoreShield:
+		fighter.shield.hit(atts.damage)
+		if fighter.shield.hp <= 0:
+			fighter.shield.breakShield()
+		else:
+			fighter.freeze.applyToTarget(atts)
+		return
 	fighter.percentage += atts.damage
 	var angle = fighter.knockback.apply(angle, atts, source)
 	fighter.freeze.applyToTarget(atts)

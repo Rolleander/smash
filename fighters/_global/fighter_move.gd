@@ -1,11 +1,20 @@
 class_name FighterMove
 extends Node2D
 
+enum MoveProtection {
+	NONE,
+	ARMOR,
+	INVINCIBLE,
+	INTANGIBLE,
+}
+
 @export var type = Moves.TYPE.NONE
 @export var chargeable = false
 @export var charge_animation: String
 @export var charge_length = 60
 @export var charge_powerup = 1.4
+@export var protection = MoveProtection.NONE
+@export var protectionLimit = 0
 
 @onready var fighter = get_parent().get_parent() as Fighter
 

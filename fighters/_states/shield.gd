@@ -1,11 +1,11 @@
 class_name SHIELD extends GroundState
 
 func enter(previous_state_path: String):
-	fighter.shield.visible = true
-	fighter.animation("SHIELD",true)
+	fighter.shield.activate(true)
+	fighter.animation("SHIELD", true)
 	
 func exit() -> void:
-	fighter.shield.visible = false
+	fighter.shield.activate(false)
 	
 func update(_delta: float) -> void:
 	super.update(_delta)
